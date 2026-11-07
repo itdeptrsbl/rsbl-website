@@ -1,0 +1,327 @@
+/* Tampilan kamar Rawat Inap, fasilitas, thumbnail, dan navigasi samping. */
+/* Rawat Inap: galeri ringkas, informasi kamar sejajar, dan navigasi kanan. */
+.inpatient-page {
+    max-width: 1350px;
+    padding-top: 28px;
+    padding-bottom: 64px;
+}
+
+.inpatient-breadcrumb {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 30px;
+}
+
+.inpatient-breadcrumb span {
+    padding: 0 10px;
+}
+
+.inpatient-intro {
+    max-width: 830px;
+    margin-bottom: 32px;
+}
+
+.inpatient-intro .eyebrow {
+    margin-bottom: 12px;
+}
+
+.inpatient-intro h1 {
+    font-size: clamp(36px, 4vw, 52px);
+    margin-bottom: 18px;
+}
+
+.inpatient-intro-text {
+    max-width: 700px;
+    line-height: 1.9;
+}
+
+.inpatient-room-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 24px;
+}
+
+.inpatient-room-links a {
+    padding: 7px 15px;
+    border: 1px solid var(--line);
+    border-radius: 30px;
+    color: var(--green);
+    font-size: 12px;
+}
+
+.inpatient-room-links a:hover {
+    background: var(--mint);
+    border-color: #8bb69b;
+}
+
+.inpatient-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 245px;
+    gap: 40px;
+    align-items: start;
+}
+
+.inpatient-room {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: 28px;
+    padding: 30px 0;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 120px;
+}
+
+.inpatient-room:first-child {
+    padding-top: 0;
+    border-top: 0;
+}
+
+.inpatient-room-gallery {
+    min-width: 0;
+}
+
+.inpatient-room-image {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #eff5f0;
+}
+
+.inpatient-room-image a {
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+}
+
+.inpatient-room-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.inpatient-room-thumbs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    margin-top: 10px;
+    padding: 3px 2px 6px;
+    scrollbar-width: thin;
+}
+
+.inpatient-room-thumbs button {
+    flex: 0 0 74px;
+    height: 51px;
+    border: 2px solid transparent;
+    background: var(--mint);
+    border-radius: 6px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.inpatient-room-thumbs button[aria-pressed='true'] {
+    border-color: var(--green);
+}
+
+.inpatient-room-thumbs img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.room-gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 38px;
+    border: 0;
+    border-radius: 6px;
+    background: #ffffffeb;
+    color: var(--dark);
+    font-size: 28px;
+    line-height: 1;
+}
+
+.room-prev {
+    left: 8px;
+}
+
+.room-next {
+    right: 8px;
+}
+
+.room-gallery-status {
+    font-size: 10px;
+    margin: 2px 0 0;
+}
+
+.inpatient-capacity {
+    display: inline-block;
+    font-size: 11px;
+    color: #276441;
+    background: #eef5ee;
+    padding: 4px 10px;
+    border-radius: 5px;
+    margin-bottom: 12px;
+}
+
+.inpatient-room-details h2 {
+    font-size: 29px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.inpatient-room-details h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 18px 0 12px;
+    letter-spacing: 0;
+}
+
+.inpatient-room-details > p:not(.inpatient-capacity) {
+    font-size: 13px;
+}
+
+.inpatient-facilities {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 14px;
+    padding-left: 16px;
+    margin-bottom: 22px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.inpatient-facilities li {
+    overflow-wrap: anywhere;
+}
+
+.inpatient-facilities li::marker {
+    color: #6d9d79;
+}
+
+.inpatient-sidebar {
+    position: sticky;
+    top: 110px;
+}
+
+.inpatient-sidebar nav,
+.inpatient-assistance {
+    padding: 22px 18px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+}
+
+.inpatient-sidebar nav {
+    background: #f0f6f2;
+}
+
+.inpatient-sidebar h2,
+.inpatient-assistance h3 {
+    font-size: 19px;
+    margin-bottom: 16px;
+}
+
+.inpatient-sidebar nav a {
+    display: block;
+    padding: 11px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.inpatient-sidebar nav a:hover,
+.inpatient-sidebar nav a[aria-current='page'] {
+    background: #166744;
+    color: white;
+}
+
+.inpatient-assistance {
+    margin-top: 18px;
+}
+
+.inpatient-assistance p {
+    font-size: 13px;
+}
+
+.inpatient-wards {
+    padding: 28px;
+    margin-top: 16px;
+    background: #f3f7f4;
+    border-radius: 12px;
+}
+
+.inpatient-wards .eyebrow {
+    margin-bottom: 12px;
+}
+
+.inpatient-wards h2 {
+    font-size: 26px;
+}
+
+.inpatient-wards ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 30px;
+    padding-left: 18px;
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 0;
+}
+
+.inpatient-note {
+    padding-top: 22px;
+    margin-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+}
+
+.inpatient-empty {
+    padding: 30px;
+    background: #f3f7f4;
+    border-radius: 12px;
+}
+
+.inpatient-empty h2 {
+    font-size: 28px;
+}
+
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 1050px) {
+    .inpatient-layout {
+        grid-template-columns: minmax(0, 1fr) 220px;
+        gap: 26px;
+    }
+
+    .inpatient-room {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+}
+
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 700px) {
+    .inpatient-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .inpatient-sidebar {
+        position: static;
+    }
+
+    .inpatient-room-details h2 {
+        font-size: 26px;
+    }
+
+    .inpatient-wards {
+        padding: 22px;
+    }
+}
+
+.inpatient-photo-caption {
+    margin: 10px 0 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+}

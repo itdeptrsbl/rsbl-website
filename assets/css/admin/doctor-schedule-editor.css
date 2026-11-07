@@ -1,0 +1,16 @@
+/* Tata letak field hari dan jam untuk tiap sesi praktik. */
+.doctor-session {
+    padding: 18px 20px;
+    margin: 16px 0;
+    background: #fafcfb;
+}
+
+.doctor-session legend {
+    padding: 0 8px;
+    font-weight: 600;
+}
+
+.doctor-session button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}

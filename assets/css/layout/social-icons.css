@@ -1,0 +1,39 @@
+/* Warna khas ikon telepon, WhatsApp, dan sosial media. */
+/* Warna ikon pada bar kontak; nomor telepon tetap mengikuti warna teks. */
+.topbar-contacts a[href^='tel:'] svg {
+    color: #70c5ff;
+}
+
+.topbar-contacts a[href^='https://wa.me/'] svg {
+    color: #25d366;
+}
+
+.social-links a[aria-label='Instagram'] svg {
+    color: #ff6fae;
+}
+
+.social-links a[aria-label='Instagram'] svg circle {
+    stroke: #ffbc65;
+}
+
+.social-links a[aria-label='Facebook'] svg {
+    color: #64a5ff;
+    fill: currentColor;
+    stroke-width: 0;
+}
+
+.social-links a[aria-label='YouTube'] svg rect {
+    fill: #ff0033;
+    stroke: #ff0033;
+}
+
+.social-links a[aria-label='YouTube'] svg path {
+    fill: white;
+    stroke: white;
+    stroke-width: 1;
+}
+
+.social-links a[aria-label='TikTok'] svg {
+    color: white;
+    filter: drop-shadow(-1px -1px 0 #25f4ee) drop-shadow(1px 1px 0 #fe2c55);
+}

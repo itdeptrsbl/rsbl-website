@@ -1,0 +1,198 @@
+/* Ukuran dan penempatan foto pemimpin rumah sakit. */
+.leader-photo-frame {
+    width: 192px;
+    max-width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 18px;
+    flex-shrink: 0;
+}
+.leader-photo-frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 30%;
+    border-radius: 0;
+    transform-origin: 50% 30%;
+}
+.leader-photo-preview .leader-photo-frame {
+    margin: 0;
+}
+.leader-photo-frame.leader-zoom-100 img {
+    transform: scale(1);
+}
+.leader-photo-frame.leader-zoom-110 img {
+    transform: scale(1.1);
+}
+.leader-photo-frame.leader-zoom-120 img {
+    transform: scale(1.2);
+}
+.leader-photo-frame.leader-zoom-130 img {
+    transform: scale(1.3);
+}
+.leader-photo-frame.leader-zoom-140 img {
+    transform: scale(1.4);
+}
+.leader-photo-frame.leader-zoom-150 img {
+    transform: scale(1.5);
+}
+.leader-photo-frame.leader-zoom-160 img {
+    transform: scale(1.6);
+}
+.leader-photo-frame.leader-zoom-170 img {
+    transform: scale(1.7);
+}
+.leader-photo-frame.leader-zoom-180 img {
+    transform: scale(1.8);
+}
+.leader-photo-frame.leader-zoom-190 img {
+    transform: scale(1.9);
+}
+.leader-photo-frame.leader-zoom-200 img {
+    transform: scale(2);
+}
+
+.leader-photo-frame {
+    --leader-x: 50%;
+    --leader-y: 30%;
+}
+.leader-photo-frame img {
+    object-position: var(--leader-x) var(--leader-y);
+    transform-origin: var(--leader-x) var(--leader-y);
+}
+.leader-photo-preview .leader-photo-frame {
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+}
+.leader-photo-preview .leader-photo-frame.is-dragging {
+    cursor: grabbing;
+}
+.leader-x-0 {
+    --leader-x: 0%;
+}
+.leader-y-0 {
+    --leader-y: 0%;
+}
+.leader-x-5 {
+    --leader-x: 5%;
+}
+.leader-y-5 {
+    --leader-y: 5%;
+}
+.leader-x-10 {
+    --leader-x: 10%;
+}
+.leader-y-10 {
+    --leader-y: 10%;
+}
+.leader-x-15 {
+    --leader-x: 15%;
+}
+.leader-y-15 {
+    --leader-y: 15%;
+}
+.leader-x-20 {
+    --leader-x: 20%;
+}
+.leader-y-20 {
+    --leader-y: 20%;
+}
+.leader-x-25 {
+    --leader-x: 25%;
+}
+.leader-y-25 {
+    --leader-y: 25%;
+}
+.leader-x-30 {
+    --leader-x: 30%;
+}
+.leader-y-30 {
+    --leader-y: 30%;
+}
+.leader-x-35 {
+    --leader-x: 35%;
+}
+.leader-y-35 {
+    --leader-y: 35%;
+}
+.leader-x-40 {
+    --leader-x: 40%;
+}
+.leader-y-40 {
+    --leader-y: 40%;
+}
+.leader-x-45 {
+    --leader-x: 45%;
+}
+.leader-y-45 {
+    --leader-y: 45%;
+}
+.leader-x-50 {
+    --leader-x: 50%;
+}
+.leader-y-50 {
+    --leader-y: 50%;
+}
+.leader-x-55 {
+    --leader-x: 55%;
+}
+.leader-y-55 {
+    --leader-y: 55%;
+}
+.leader-x-60 {
+    --leader-x: 60%;
+}
+.leader-y-60 {
+    --leader-y: 60%;
+}
+.leader-x-65 {
+    --leader-x: 65%;
+}
+.leader-y-65 {
+    --leader-y: 65%;
+}
+.leader-x-70 {
+    --leader-x: 70%;
+}
+.leader-y-70 {
+    --leader-y: 70%;
+}
+.leader-x-75 {
+    --leader-x: 75%;
+}
+.leader-y-75 {
+    --leader-y: 75%;
+}
+.leader-x-80 {
+    --leader-x: 80%;
+}
+.leader-y-80 {
+    --leader-y: 80%;
+}
+.leader-x-85 {
+    --leader-x: 85%;
+}
+.leader-y-85 {
+    --leader-y: 85%;
+}
+.leader-x-90 {
+    --leader-x: 90%;
+}
+.leader-y-90 {
+    --leader-y: 90%;
+}
+.leader-x-95 {
+    --leader-x: 95%;
+}
+.leader-y-95 {
+    --leader-y: 95%;
+}
+.leader-x-100 {
+    --leader-x: 100%;
+}
+.leader-y-100 {
+    --leader-y: 100%;
+}

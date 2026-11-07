@@ -1,0 +1,4 @@
+# Pengaturan gaya kode Python untuk tes dan alat pengembangan.
+[tool.black]
+line-length = 100
+target-version = ["py310"]

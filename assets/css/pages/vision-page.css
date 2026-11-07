@@ -1,0 +1,268 @@
+/* Tampilan bagian visi, misi, janji, motto, dan nilai rumah sakit. */
+.vision-page {
+    background: radial-gradient(ellipse at 95% 0, #eaf4ed80, transparent 40%), #fff;
+}
+.vision-page .page-intro {
+    padding-bottom: 24px;
+}
+.vision-sections {
+    padding-bottom: 60px;
+}
+.vision-statement {
+    position: relative;
+    overflow: hidden;
+    background: var(--dark);
+    padding: clamp(28px, 5vw, 64px);
+    border-radius: 22px;
+    margin-bottom: 64px;
+}
+.vision-statement::after {
+    content: '';
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    right: -130px;
+    bottom: -150px;
+    border: 1px solid #ffffff20;
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 48px #ffffff04,
+        0 0 0 96px #ffffff03;
+    pointer-events: none;
+}
+.vision-statement .eyebrow {
+    color: #bcdaca;
+    font-size: clamp(22px, 2.5vw, 30px);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 22px;
+}
+.vision-main-text {
+    color: #fff;
+    font-size: clamp(24px, 3vw, 36px);
+    line-height: 1.55;
+    letter-spacing: -0.025em;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    overflow-wrap: anywhere;
+}
+.vision-section {
+    margin-bottom: 64px;
+}
+.vision-sections h2 {
+    font-size: clamp(24px, 2.5vw, 30px);
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 26px;
+    letter-spacing: 0.04em;
+}
+.vision-missions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 40px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.vision-missions li {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 25px 0;
+    border-top: 1px solid var(--line);
+}
+.mission-number {
+    color: #7aa592;
+    font-size: 23px;
+    line-height: 1.5;
+    flex-shrink: 0;
+    letter-spacing: -0.04em;
+}
+.vision-missions p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+}
+.vision-commitments {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 24px;
+    margin-bottom: 64px;
+}
+.vision-commitments section {
+    border-radius: 18px;
+    padding: 34px;
+    background: #f0f6f1;
+}
+.vision-commitments .vision-motto {
+    background: #faf9f3;
+}
+.vision-commitments h2 {
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    margin-bottom: 18px;
+    color: var(--green);
+}
+.vision-commitments p {
+    font-size: 21px;
+    line-height: 1.75;
+    color: var(--ink);
+    margin-bottom: 0;
+    overflow-wrap: anywhere;
+}
+.vision-motto p {
+    font-style: italic;
+}
+.vision-trust-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 22px;
+}
+.vision-trust-heading .eyebrow {
+    margin: 0;
+}
+.vision-care-icon {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    border: 1px solid #ffffff30;
+    border-radius: 16px;
+    color: #c2e4d4;
+    background: #ffffff08;
+}
+.vision-care-icon svg,
+.promise-care-icon svg {
+    width: 32px;
+    height: 32px;
+}
+.vision-commitments .vision-promise {
+    background: linear-gradient(135deg, #eef6f0, #f7faf7);
+    border: 1px solid #dce9df;
+}
+.promise-trust-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.vision-commitments .promise-trust-heading h2 {
+    margin: 0;
+}
+.promise-care-icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    color: var(--green);
+    background: #dfede3;
+    flex-shrink: 0;
+}
+.motto-care-icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    flex-shrink: 0;
+}
+.motto-care-icon {
+    color: #827345;
+    background: #eeeadd;
+}
+.motto-care-icon svg {
+    width: 32px;
+    height: 32px;
+}
+.vision-values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.vision-values li {
+    flex: 1 1 220px;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    padding: 25px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    transition:
+        border-color 0.2s,
+        background 0.2s;
+}
+.vision-values li:hover {
+    border-color: #9bc4b3;
+    background: #f5f9f5;
+}
+.value-mark {
+    color: var(--green);
+    font-size: 22px;
+}
+.vision-values p {
+    margin: 0;
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 600px) {
+    .vision-missions {
+        grid-template-columns: 1fr;
+    }
+    .vision-statement,
+    .vision-section,
+    .vision-commitments {
+        margin-bottom: 38px;
+    }
+    .vision-commitments section {
+        padding: 26px;
+    }
+    .vision-commitments p {
+        font-size: 18px;
+    }
+    .vision-values li {
+        flex-basis: 100%;
+    }
+}
+.vision-missions li {
+    transition:
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+.vision-missions li:hover {
+    border-color: #7aa592;
+    transform: translateX(4px);
+}
+.vision-commitments section {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+.vision-commitments section:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px -20px #164d4440;
+}
+/* Mengikuti pilihan pengguna yang ingin mengurangi gerakan animasi. */
+@media (prefers-reduced-motion: reduce) {
+    .vision-values li,
+    .vision-missions li,
+    .vision-commitments section {
+        transition: none;
+    }
+    .vision-missions li:hover,
+    .vision-commitments section:hover {
+        transform: none;
+    }
+}

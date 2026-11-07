@@ -1,0 +1,17 @@
+# Data lokal, unggahan, dan dependency tidak dimasukkan ke riwayat Git.
+node_modules/
+__pycache__/
+*.pyc
+storage/backups/
+storage/*.sqlite*
+assets/uploads/*
+!assets/uploads/.htaccess
+
+# Rahasia dan konfigurasi lokal khusus mesin/server.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+config.local.php
+*.log

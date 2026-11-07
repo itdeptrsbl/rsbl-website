@@ -1,0 +1,12 @@
+# Apache/XAMPP: larang pembacaan konfigurasi, kode internal, dan database.
+Options -Indexes
+<IfModule php_module>
+php_value upload_max_filesize 50M
+php_value post_max_size 128M
+</IfModule>
+<Files ".user.ini">
+Require all denied
+</Files>
+<FilesMatch "^(config\.php|package\.json|package-lock\.json|requirements-dev\.txt|README\.md|CHANGELOG\.md|start\.bat|router\.php)$">
+Require all denied
+</FilesMatch>

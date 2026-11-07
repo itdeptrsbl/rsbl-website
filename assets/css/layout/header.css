@@ -1,0 +1,937 @@
+/* Tata letak header, identitas, kontak, navigasi, dan penyesuaian layarnya. */
+/* Revisi header dan hero. Dimuat setelah style.css agar bagian lain tetap sama. */
+.topbar-v2 .container {
+    max-width: 1480px;
+    align-items: center;
+    gap: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.topbar-contacts {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+.topbar-contacts > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+.topbar-v2 .social-links {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+}
+.social-links a {
+    display: flex;
+    padding: 2px;
+}
+.social-links svg {
+    width: 15px;
+    height: 15px;
+}
+.header-v2 .container {
+    max-width: 1480px;
+}
+.header-v2 .nav-wrap {
+    gap: 22px;
+    height: 102px;
+}
+.brand-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-width: 0;
+}
+.hospital-brand {
+    font-size: 17px;
+    white-space: nowrap;
+}
+.hospital-brand small {
+    font-size: 7px;
+}
+.hospital-brand .brand-logo {
+    width: 44px;
+    height: 48px;
+}
+.company-brand {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-left: 1px solid var(--line);
+    padding-left: 20px;
+}
+.company-brand img {
+    width: 38px;
+    height: 42px;
+    object-fit: contain;
+}
+.company-brand span {
+    font-size: 10px;
+    max-width: 138px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 1.6;
+}
+.accreditation-mark {
+    height: 55px;
+    width: 63px;
+    object-fit: contain;
+}
+.header-v2 .nav-wrap nav {
+    gap: 21px;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+.wide-hero {
+    padding: 0 0 38px;
+}
+.hospital-slideshow {
+    position: relative;
+    background: #e8f0eb;
+    overflow: hidden;
+}
+.slide-stage {
+    position: relative;
+}
+.hospital-slide {
+    margin: 0;
+    position: relative;
+}
+.hospital-slide img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2.65/1;
+    object-fit: cover;
+    object-position: center 36%;
+    max-height: 660px;
+    min-height: 310px;
+}
+.hospital-slide figcaption {
+    position: absolute;
+    left: 38px;
+    bottom: 24px;
+    max-width: 70%;
+    background: #fffffff0;
+    border: 1px solid #ffffff80;
+    padding: 11px 18px;
+    border-radius: 8px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 12px;
+    color: var(--ink);
+}
+.hospital-slide figcaption span {
+    color: var(--green);
+    font-size: 10px;
+}
+.hospital-slide figcaption strong {
+    font-weight: 500;
+}
+.hospital-slide figcaption a {
+    color: var(--green);
+    text-decoration: underline;
+    font-size: 11px;
+}
+.slide-arrow {
+    position: absolute;
+    top: 45%;
+    background: #fffdf5dd;
+    border: 1px solid #fff;
+    color: var(--dark);
+    border-radius: 50%;
+    width: 43px;
+    height: 43px;
+    font-size: 32px;
+    line-height: 1;
+    display: grid;
+    place-items: center;
+}
+.slide-prev {
+    left: 22px;
+}
+.slide-next {
+    right: 22px;
+}
+.slide-arrow:hover {
+    background: #fff;
+}
+.slide-toolbar {
+    position: absolute;
+    right: 35px;
+    bottom: 25px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    background: #ffffffec;
+    padding: 8px 12px;
+    border-radius: 30px;
+}
+.slide-dots {
+    display: flex;
+    gap: 8px;
+}
+.slide-dots button {
+    border: 0;
+    padding: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #adc2b6;
+}
+.slide-dots button[aria-pressed='true'] {
+    background: var(--green);
+    width: 21px;
+    border-radius: 9px;
+}
+.slide-pause {
+    border: 0;
+    background: none;
+    font-size: 10px;
+    color: var(--green);
+    padding: 0 3px;
+}
+.hero-introduction {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 65px;
+    align-items: center;
+    padding-top: 37px;
+    padding-bottom: 15px;
+}
+.hero-introduction .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+    text-transform: none;
+}
+.hero-introduction h1 {
+    font-size: clamp(32px, 3.1vw, 46px);
+    margin: 0;
+    line-height: 1.2;
+}
+.hero-intro-description p {
+    font-size: 14px;
+    line-height: 1.85;
+    margin-bottom: 19px;
+}
+.hero-intro-description .button {
+    padding: 13px 19px;
+    font-size: 12px;
+}
+.hero-intro-description .actions {
+    gap: 20px;
+}
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+/* Penyesuaian tampilan untuk ukuran atau kemampuan layar tertentu. */
+@media (min-width: 1600px) {
+    .hospital-slide img {
+        aspect-ratio: 3/1;
+    }
+    .hospital-slide figcaption {
+        left: max(38px, calc((100vw - 1164px) / 2));
+    }
+}
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 1250px) {
+    .header-v2 .nav-wrap nav {
+        gap: 14px;
+        font-size: 11px;
+    }
+    .brand-group {
+        gap: 12px;
+    }
+    .company-brand {
+        padding-left: 12px;
+    }
+    .company-brand span {
+        font-size: 9px;
+        max-width: 110px;
+    }
+    .company-brand img {
+        width: 32px;
+    }
+    .hospital-brand {
+        font-size: 15px;
+    }
+    .accreditation-mark {
+        width: 48px;
+        height: 47px;
+    }
+    .header-v2 .button.small {
+        padding: 11px 12px;
+    }
+}
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 1050px) {
+    .header-v2 .nav-wrap {
+        height: 94px;
+    }
+    .header-v2 .menu-toggle {
+        display: block;
+    }
+    .header-v2 .nav-wrap nav {
+        display: none;
+        position: absolute;
+        top: 94px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--line);
+        box-shadow: 0 15px 20px #143e3410;
+    }
+    .header-v2 .nav-wrap nav.open {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 5px;
+        font-size: 13px;
+    }
+    .hero-introduction {
+        gap: 30px;
+    }
+    .hospital-slide img {
+        min-height: 290px;
+    }
+}
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 800px) {
+    .topbar-v2 .container {
+        display: flex;
+    }
+    .topbar-contacts {
+        gap: 15px;
+    }
+    .hero-introduction {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        padding-top: 29px;
+    }
+    .hero-introduction h1 {
+        font-size: 38px;
+    }
+    .hero-intro-description p {
+        max-width: 620px;
+    }
+    .hospital-slide img {
+        aspect-ratio: 2.65/1;
+        min-height: 0;
+        max-height: none;
+    }
+    .hospital-slide figcaption {
+        left: 20px;
+        bottom: 15px;
+        padding: 8px 12px;
+        font-size: 10px;
+        max-width: 60%;
+    }
+    .hospital-slide figcaption span {
+        display: none;
+    }
+    .slide-toolbar {
+        right: 20px;
+        bottom: 16px;
+    }
+    .slide-arrow {
+        width: 33px;
+        height: 33px;
+        font-size: 25px;
+        top: 39%;
+    }
+    .slide-prev {
+        left: 12px;
+    }
+    .slide-next {
+        right: 12px;
+    }
+    .topbar-v2 .wa-number {
+        display: none;
+    }
+    .wide-hero {
+        padding-bottom: 30px;
+    }
+}
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 520px) {
+    .topbar-v2 .container {
+        padding-left: 15px;
+        padding-right: 15px;
+        gap: 10px;
+    }
+    .topbar-v2 .topbar-contacts > a {
+        display: inline-flex !important;
+        font-size: 9px;
+    }
+    .topbar-contacts {
+        gap: 12px;
+    }
+    .topbar-v2 .social-links {
+        gap: 10px;
+    }
+    .social-links svg {
+        width: 12px;
+        height: 12px;
+    }
+    .header-v2 .container {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+    .header-v2 .nav-wrap {
+        height: 86px;
+        gap: 8px;
+    }
+    .header-v2 .nav-wrap nav {
+        top: 86px;
+    }
+    .brand-group {
+        gap: 8px;
+        flex: 1;
+    }
+    .hospital-brand {
+        font-size: 11px;
+        gap: 6px;
+    }
+    .hospital-brand small {
+        font-size: 5px;
+        letter-spacing: 0.07em;
+    }
+    .hospital-brand .brand-logo {
+        width: 28px;
+        height: 36px;
+    }
+    .company-brand {
+        gap: 5px;
+        padding-left: 8px;
+    }
+    .company-brand img {
+        width: 24px;
+        height: 30px;
+    }
+    .company-brand span {
+        font-size: 7px;
+        max-width: 83px;
+        letter-spacing: 0.03em;
+    }
+    .accreditation-mark {
+        width: 35px;
+        height: 37px;
+    }
+    .header-v2 .menu-toggle {
+        padding: 3px 7px;
+        font-size: 20px;
+    }
+    .hospital-slide img {
+        aspect-ratio: 2.25/1;
+        object-fit: contain;
+        background: #e8f0eb;
+    }
+    .hospital-slide figcaption {
+        position: static;
+        max-width: none;
+        border: 0;
+        border-radius: 0;
+        background: #f0f5ef;
+        padding: 10px 18px;
+        min-height: 39px;
+        display: block;
+    }
+    .hospital-slide figcaption strong {
+        font-size: 10px;
+        display: block;
+        margin-right: 110px;
+    }
+    .hospital-slide figcaption a {
+        font-size: 9px;
+    }
+    .slide-toolbar {
+        bottom: 8px;
+        right: 12px;
+        padding: 7px 9px;
+        gap: 8px;
+    }
+    .slide-dots {
+        gap: 5px;
+    }
+    .slide-dots button {
+        width: 6px;
+        height: 6px;
+    }
+    .slide-dots button[aria-pressed='true'] {
+        width: 15px;
+    }
+    .slide-pause {
+        font-size: 9px;
+    }
+    .slide-arrow {
+        top: 32%;
+        width: 27px;
+        height: 27px;
+        font-size: 23px;
+    }
+    .hero-introduction {
+        gap: 18px;
+        padding-top: 25px;
+    }
+    .hero-introduction .eyebrow {
+        font-size: 8px;
+        line-height: 1.8;
+        letter-spacing: 0.03em;
+    }
+    .hero-introduction .eyebrow span {
+        display: block;
+    }
+    .hero-introduction h1 {
+        font-size: 33px;
+    }
+    .hero-intro-description p {
+        font-size: 13px;
+    }
+    .hero-intro-description .actions {
+        gap: 15px;
+    }
+    .hero-intro-description .button {
+        font-size: 11px;
+    }
+    .hero-intro-description .text-link {
+        font-size: 11px;
+    }
+}
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 360px) {
+    .company-brand img {
+        display: none;
+    }
+    .brand-group {
+        gap: 6px;
+    }
+    .company-brand span {
+        max-width: 72px;
+        font-size: 6px;
+    }
+    .hospital-brand {
+        font-size: 10px;
+    }
+    .topbar-v2 .social-links {
+        gap: 7px;
+    }
+}
+
+/* Kontak, identitas, dan foto menjadi fokus utama beranda. */
+.topbar-v2 {
+    background: #084b33;
+    font-size: 12px;
+    font-weight: 600;
+}
+.topbar-contacts svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+.topbar-contacts > a + a {
+    border-left: 1px solid #ffffff60;
+    padding-left: 24px;
+}
+.topbar-v2 .social-links svg {
+    width: 18px;
+    height: 18px;
+}
+.topbar-v2 a {
+    min-height: 28px;
+}
+.hospital-brand {
+    color: #24983c;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 16px;
+}
+.company-brand span {
+    color: #24983c;
+    font-size: 12px;
+    font-weight: 700;
+    max-width: 155px;
+    line-height: 1.4;
+}
+.company-brand img {
+    width: 42px;
+    height: 46px;
+}
+.accreditation-mark {
+    border-left: 1px solid var(--line);
+    padding-left: 16px;
+    width: 78px;
+    height: 60px;
+}
+.header-v2 .nav-wrap nav {
+    gap: 10px;
+    margin-left: auto;
+}
+.header-v2 .nav-wrap nav > a:not(.button) {
+    padding: 9px 18px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    font-weight: 600;
+}
+.header-v2 .nav-wrap nav > a.active {
+    border-color: #18733d;
+    color: #084b33;
+}
+.header-v2 .nav-wrap nav > a:hover {
+    background: #eef6ef;
+}
+.hospital-slide img {
+    aspect-ratio: 3.3/1;
+    object-position: center;
+    min-height: 0;
+    max-height: none;
+}
+.hospital-slide figcaption {
+    left: 5%;
+    bottom: 24px;
+    max-width: 55%;
+    padding: 9px 15px;
+    font-size: 12px;
+    flex-wrap: wrap;
+}
+.hospital-slide figcaption:has(strong:only-child) {
+    background: #ffffffe6;
+}
+.slide-arrow {
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 3px 12px #123b3020;
+}
+.slide-toolbar {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    bottom: 18px;
+    background: #ffffffde;
+}
+.slide-dots button {
+    width: 11px;
+    height: 11px;
+}
+.slide-dots button[aria-pressed='true'] {
+    width: 11px;
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
+.hero-introduction {
+    max-width: 1480px;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 40px;
+    padding-top: 34px;
+    padding-bottom: 10px;
+}
+.hero-introduction .eyebrow {
+    font-size: 16px;
+    font-style: italic;
+    letter-spacing: 0;
+    margin-bottom: 17px;
+    color: #248338;
+}
+.hero-introduction h1 {
+    font-size: clamp(28px, 2.8vw, 44px);
+    font-weight: 700;
+    color: #103f27;
+    letter-spacing: -0.025em;
+}
+.hero-introduction h1 br {
+    display: none;
+}
+.hero-intro-description {
+    border-left: 1px solid #c7ded0;
+    padding-left: 38px;
+}
+.hero-intro-description p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+.hero-intro-description .actions {
+    gap: 12px;
+}
+.hero-intro-description .button {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 11px 20px;
+    background: #0c6030;
+}
+.hero-intro-description .button-outline {
+    background: white;
+    color: #0c6030;
+    border-color: #0c6030;
+}
+.hero-intro-description .button-outline:hover {
+    background: #eef6ef;
+}
+@media (max-width: 1250px) {
+    .header-v2 .nav-wrap nav > a:not(.button) {
+        padding: 9px 12px;
+    }
+    .hospital-brand {
+        font-size: 13px;
+    }
+    .company-brand span {
+        font-size: 10px;
+        max-width: 124px;
+    }
+    .company-brand img {
+        width: 32px;
+    }
+    .hero-introduction {
+        gap: 28px;
+    }
+    .hero-intro-description {
+        padding-left: 28px;
+    }
+}
+@media (max-width: 1050px) {
+    .header-v2 .nav-wrap nav {
+        margin-left: 0;
+    }
+    .hospital-brand {
+        font-size: 16px;
+    }
+    .company-brand span {
+        font-size: 12px;
+        max-width: 155px;
+    }
+    .hospital-slide img {
+        aspect-ratio: 2.8/1;
+    }
+    .hero-introduction {
+        grid-template-columns: 1fr 1fr;
+    }
+    .hero-introduction .eyebrow {
+        font-size: 14px;
+    }
+}
+@media (max-width: 800px) {
+    .hero-introduction {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+    .hero-intro-description {
+        border-left: 0;
+        border-top: 1px solid #dce6df;
+        padding: 22px 0 0;
+    }
+    .hero-introduction h1 {
+        font-size: 34px;
+    }
+    .hospital-slide img {
+        aspect-ratio: 2.65/1;
+    }
+    .hospital-slide figcaption {
+        bottom: 58px;
+        left: 20px;
+    }
+    .slide-toolbar {
+        bottom: 12px;
+    }
+    .topbar-contacts > a + a {
+        padding-left: 14px;
+    }
+}
+@media (max-width: 520px) {
+    .hospital-brand {
+        font-size: 10px;
+        letter-spacing: 0.04em;
+    }
+    .company-brand span {
+        font-size: 8px;
+        max-width: 98px;
+    }
+    .company-brand img {
+        width: 24px;
+    }
+    .accreditation-mark {
+        padding-left: 6px;
+        width: 40px;
+        height: 38px;
+    }
+    .topbar-v2 .social-links svg {
+        width: 13px;
+        height: 13px;
+    }
+    .topbar-contacts svg {
+        width: 13px;
+        height: 13px;
+    }
+    .topbar-contacts {
+        gap: 8px;
+    }
+    .topbar-contacts > a + a {
+        padding-left: 8px;
+    }
+    .topbar-v2 .social-links {
+        gap: 6px;
+    }
+    .topbar-v2 .container {
+        gap: 6px;
+    }
+    .hospital-slide img {
+        aspect-ratio: 2.25/1;
+        object-fit: cover;
+    }
+    .hospital-slide figcaption {
+        position: static;
+        max-width: none;
+        min-height: 64px;
+        padding-bottom: 34px;
+    }
+    .hospital-slide figcaption strong {
+        margin-right: 0;
+    }
+    .slide-toolbar {
+        bottom: 7px;
+    }
+    .slide-dots button,
+    .slide-dots button[aria-pressed='true'] {
+        width: 8px;
+        height: 8px;
+    }
+    .hero-introduction .eyebrow {
+        font-size: 13px;
+    }
+    .hero-introduction h1 {
+        font-size: 30px;
+    }
+    .hero-intro-description p {
+        font-size: 14px;
+    }
+    .hero-intro-description .button {
+        padding: 11px 15px;
+        font-size: 12px;
+    }
+    .slide-arrow {
+        top: 32%;
+    }
+}
+
+.hero-introduction .hero-motto-translation {
+    margin: 12px 0 0;
+    font-size: clamp(16px, 1.5vw, 21px);
+    font-weight: 500;
+    line-height: 1.5;
+    color: #248338;
+}
+
+/* Header padat dengan ukuran logo dan posisi menu yang selaras. */
+.header-v2 .hospital-brand,
+.header-v2 .company-brand span {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-weight: 900;
+    -webkit-text-stroke: 0.25px currentColor;
+}
+
+.header-v2 .hospital-brand small {
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-text-stroke: 0;
+}
+
+.topbar-v2 .container {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.topbar-v2 a {
+    min-height: 24px;
+}
+
+.header-v2 .nav-wrap {
+    height: 90px;
+}
+
+.header-v2 .hospital-brand small {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    line-height: 1.5;
+}
+
+.header-v2 .company-brand {
+    justify-content: center;
+    padding: 0 20px;
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+}
+
+/* Lebar teks mengikuti isinya agar tidak ada ruang kosong di sisi kanan. */
+.header-v2 .company-brand span {
+    width: max-content;
+    max-width: none;
+    white-space: nowrap;
+}
+
+.header-v2 .hospital-brand .brand-logo {
+    width: 60px;
+    height: 64px;
+}
+
+.header-v2 .company-brand img {
+    width: 60px;
+    height: 64px;
+}
+
+.header-v2 .accreditation-mark {
+    border-left: 0;
+    padding-left: 0;
+    width: 62px;
+    height: 46px;
+}
+
+@media (max-width: 1050px) {
+    .header-v2 .nav-wrap {
+        height: 76px;
+    }
+
+    .header-v2 .nav-wrap nav {
+        top: 76px;
+    }
+}
+
+@media (max-width: 520px) {
+    .header-v2 .nav-wrap {
+        height: 68px;
+    }
+
+    .header-v2 .nav-wrap nav {
+        top: 68px;
+    }
+
+    .header-v2 .hospital-brand small {
+        font-size: 6px;
+        letter-spacing: 0.02em;
+    }
+
+    .header-v2 .company-brand {
+        padding: 0 8px;
+    }
+
+    .header-v2 .hospital-brand .brand-logo {
+        width: 38px;
+        height: 44px;
+    }
+
+    .header-v2 .company-brand img {
+        width: 36px;
+        height: 44px;
+    }
+
+    .header-v2 .accreditation-mark {
+        width: 34px;
+        height: 32px;
+    }
+}

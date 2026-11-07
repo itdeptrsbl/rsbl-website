@@ -1,0 +1,447 @@
+/* Tampilan editor foto, pratinjau, tombol zoom, dan animasi foto bersama. */
+/* Foto beranda dan pratinjau master memakai rasio yang sama. */
+.slide-photo-frame,
+.slide-preview {
+    aspect-ratio: 2.7273 / 1;
+    overflow: hidden;
+    background: #e8f0eb;
+}
+
+.hospital-slide .slide-photo-frame img,
+.slide-preview img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    max-height: none;
+    aspect-ratio: auto;
+    object-fit: cover;
+    object-position: center;
+}
+
+.slide-editor {
+    padding: 24px;
+    margin: 24px 0;
+    background: #f7faf8;
+}
+
+.slide-editor legend {
+    padding: 0 8px;
+    font-weight: 600;
+}
+
+.slide-preview {
+    width: 100%;
+    margin: 20px auto 12px;
+    border-radius: 10px;
+    border: 1px solid #dce6df;
+}
+
+.slide-preview[data-size='tablet'] {
+    max-width: 768px;
+    aspect-ratio: 2.1818 / 1;
+}
+
+.slide-preview[data-size='mobile'] {
+    max-width: 390px;
+    aspect-ratio: 1.8636 / 1;
+}
+
+/* Slogan sederhana dengan hierarki ukuran yang jelas. */
+.hero-introduction .hero-motto {
+    padding: 8px 0;
+}
+
+.hero-introduction .hero-motto h1 {
+    font-family: inherit;
+    font-size: clamp(38px, 3.6vw, 58px);
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: 0.035em;
+    word-spacing: 0.06em;
+    color: #103f27;
+    text-wrap: balance;
+}
+
+.hero-introduction .hero-motto-translation {
+    margin: 12px 0 0;
+    font-size: clamp(17px, 1.5vw, 22px);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #647773;
+    text-wrap: balance;
+}
+
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 1050px) {
+    .slide-photo-frame {
+        aspect-ratio: 2.3182 / 1;
+    }
+}
+
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 800px) {
+    .slide-photo-frame {
+        aspect-ratio: 2.1818 / 1;
+    }
+}
+
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 520px) {
+    .slide-photo-frame {
+        aspect-ratio: 1.8636 / 1;
+    }
+
+    .hero-introduction .hero-motto h1 {
+        font-size: clamp(34px, 8vw, 40px);
+        letter-spacing: 0.025em;
+    }
+
+    .hero-introduction .hero-motto-translation {
+        font-size: 18px;
+    }
+
+    .slide-editor {
+        padding: 16px;
+    }
+}
+
+/* Seret langsung foto sampul pada pratinjau master. */
+.slide-edit-toolbar,
+.slide-zoom-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.slide-edit-toolbar {
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.slide-zoom-controls button {
+    width: 38px;
+    height: 38px;
+    border: 1px solid #cddbd3;
+    border-radius: 6px;
+    background: white;
+    color: #103f27;
+    font-size: 22px;
+}
+
+.slide-zoom-controls button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.slide-zoom-controls output {
+    min-width: 48px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.slide-preview {
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+}
+
+.slide-preview.is-dragging {
+    cursor: grabbing;
+}
+
+.slide-preview img {
+    pointer-events: none;
+}
+
+/* Navigasi langsung di atas foto tanpa latar tombol. */
+.hospital-slideshow .slide-arrow,
+.hospital-slideshow .slide-arrow:hover {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    color: white;
+    width: 56px;
+    height: 64px;
+    font-size: 64px;
+    font-weight: 400;
+    text-shadow: 0 1px 5px #123b3080;
+}
+
+.hospital-slideshow .slide-toolbar {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+}
+
+.hospital-slideshow .slide-dots button {
+    background: #ffffffb3;
+    box-shadow: 0 1px 4px #123b3050;
+}
+
+.hospital-slideshow .slide-dots button[aria-pressed='true'] {
+    background: #167366;
+}
+
+@media (max-width: 520px) {
+    .hospital-slideshow .slide-arrow {
+        width: 44px;
+        height: 52px;
+        font-size: 52px;
+    }
+}
+
+/* Gerak singkat dan halus, tanpa animasi teks berulang. */
+/* Mengikuti pilihan pengguna yang ingin mengurangi gerakan animasi. */
+@media (prefers-reduced-motion: no-preference) {
+    .hospital-slide.is-current {
+        animation: slide-appear 650ms ease-out both;
+    }
+
+    .hospital-slide.is-current .slide-photo-frame {
+        animation: slide-settle 5s cubic-bezier(0.2, 0.6, 0.3, 1) both;
+        transform-origin: center;
+    }
+
+    .hospital-slide.is-current figcaption {
+        animation: hero-text-enter 650ms ease-out 180ms both;
+    }
+
+    .hero-motto h1 {
+        animation: hero-text-enter 750ms ease-out 100ms both;
+    }
+
+    .hero-motto-translation {
+        animation: hero-text-enter 750ms ease-out 220ms both;
+    }
+
+    .hero-intro-description {
+        animation: hero-text-enter 750ms ease-out 320ms both;
+    }
+}
+
+@keyframes slide-appear {
+    from {
+        opacity: 0.35;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-settle {
+    from {
+        transform: scale(1.018);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes hero-text-enter {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.facility-master-thumb {
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* Foto utuh tidak diberi efek zoom bingkai agar tepinya tetap terlihat. */
+.hospital-slide.is-current .slide-photo-frame.is-photo-contained {
+    animation: none;
+    transform: none;
+}
+
+/* Rasio pratinjau Rawat Jalan sama dengan galeri pada halaman publik. */
+.slide-editor[data-photo-kind='outpatient_photo'] .slide-preview {
+    aspect-ratio: 16 / 9;
+}
+
+/* Ukuran pratinjau ikon sama dengan lingkaran pada halaman Rawat Jalan. */
+.slide-editor[data-photo-kind='clinic'] .slide-preview.clinic-preview {
+    width: 120px;
+    height: 120px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: white;
+    outline: 1px dashed #7caa94;
+    outline-offset: 3px;
+}
+
+.slide-editor[data-photo-kind='inpatient_room'] .slide-preview {
+    aspect-ratio: 16 / 10;
+}
+
+.inpatient-master-photos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 16px 0;
+}
+
+.inpatient-master-photos img {
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+/* Pratinjau setiap foto tambahan yang belum disimpan. */
+[data-new-room-captions] {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: 18px;
+    margin: 16px 0;
+}
+
+.inpatient-upload-preview {
+    padding: 12px;
+    min-width: 0;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+
+.inpatient-upload-preview img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: contain;
+    background: var(--mint);
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.inpatient-upload-preview label {
+    overflow-wrap: anywhere;
+    margin-bottom: 0;
+}
+
+/* Rasio sama dengan foto publik, dengan kontrol setiap gambar. */
+.inpatient-adjustable-photos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+}
+
+.inpatient-adjustable-photos > div {
+    min-width: 0;
+}
+
+.room-photo-adjust-frame {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--mint);
+    border-radius: 8px;
+    cursor: grab;
+    touch-action: none;
+}
+
+.room-photo-adjust-frame.is-dragging {
+    cursor: grabbing;
+}
+
+.room-photo-adjust-frame img,
+.inpatient-master-photos .room-photo-adjust-frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    margin: 0;
+    border-radius: 0;
+    pointer-events: none;
+}
+
+.room-photo-adjust-toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.room-photo-adjust-toolbar select {
+    width: auto;
+    margin: 0;
+    padding: 6px;
+    font-size: 12px;
+}
+
+.room-photo-adjust-toolbar button {
+    padding: 5px 10px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    color: var(--green);
+}
+
+.room-photo-adjust-toolbar output {
+    font-size: 12px;
+    min-width: 40px;
+    text-align: center;
+}
+
+.room-photo-file-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+
+.room-photo-file-row > input:not([hidden]) {
+    flex: 1 1 260px;
+    width: auto;
+    min-width: 0;
+    margin-top: 0;
+}
+
+.room-photo-file-row .button {
+    flex-shrink: 0;
+}
+
+.inpatient-upload-preview > .text-button {
+    margin-top: 12px;
+}
+
+.room-upload-row {
+    padding: 18px;
+    margin: 16px 0;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+
+.room-upload-row .room-photo-file-row label {
+    flex: 1 1 260px;
+    margin-bottom: 0;
+}
+
+.room-upload-row [data-room-file-preview] {
+    max-width: 500px;
+}
+
+.room-upload-row > label {
+    margin-bottom: 0;
+}
+
+.slide-editor[data-photo-kind='emergency_photo'] .slide-preview {
+    aspect-ratio: 16 / 10;
+}
+
+.slide-editor[data-photo-kind='pharmacy_photo'] .slide-preview,
+.slide-editor[data-photo-kind='radiology_photo'] .slide-preview,
+.slide-editor[data-photo-kind='physiotherapy_photo'] .slide-preview,
+.slide-editor[data-photo-kind='laboratory_photo'] .slide-preview {
+    aspect-ratio: 16 / 10;
+}

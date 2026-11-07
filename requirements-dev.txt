@@ -1,0 +1,2 @@
+# Formatter Python untuk menjaga format tests/ tetap konsisten.
+black==26.10.1

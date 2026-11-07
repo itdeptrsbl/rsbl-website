@@ -1,0 +1,258 @@
+/* Tampilan halaman IGD dengan kontak ringkas, foto, dan menu fasilitas. */
+/* Kontak menjadi fokus; foto dan fasilitas tetap berada di dalam konten. */
+.emergency-page {
+    max-width: 1268px;
+    padding-top: 28px;
+    padding-bottom: 64px;
+}
+
+.emergency-breadcrumb {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 32px;
+}
+
+.emergency-breadcrumb span {
+    padding: 0 10px;
+}
+
+.emergency-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 36px;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.emergency-intro .eyebrow {
+    margin-bottom: 14px;
+}
+
+.emergency-intro h1 {
+    font-size: clamp(32px, 3.2vw, 44px);
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.emergency-hours {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: #24613f;
+    padding: 5px 12px;
+    background: #eef6ef;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.emergency-hours span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #4b8f5c;
+}
+
+.emergency-intro-text {
+    max-width: 560px;
+    line-height: 1.9;
+    margin-bottom: 0;
+}
+
+.emergency-contact {
+    width: 100%;
+    max-width: 320px;
+    justify-self: end;
+    padding: 18px;
+    border-radius: 10px;
+    background: #104d38;
+    color: white;
+}
+
+.emergency-contact .eyebrow {
+    color: #c7dfcf;
+    font-size: 9px;
+    margin-bottom: 8px;
+}
+
+.emergency-contact h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.emergency-phone {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-top: 1px solid #ffffff30;
+}
+
+.emergency-phone svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.emergency-phone small {
+    color: #c7dfcf;
+    font-size: 11px;
+    margin-bottom: 4px;
+}
+
+.emergency-phone strong {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    overflow-wrap: anywhere;
+}
+
+.emergency-phone:hover strong {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.emergency-contact .emergency-ambulance-note,
+.emergency-contact .emergency-arrival-note {
+    color: #d8e9df;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-top: 12px;
+    margin-bottom: 0;
+}
+
+.emergency-arrival-note {
+    border-top: 1px solid #ffffff30;
+    padding-top: 12px;
+}
+
+.emergency-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 250px;
+    align-items: start;
+    gap: 40px;
+}
+
+.emergency-gallery {
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--mint);
+}
+
+.emergency-gallery .slide-photo-frame {
+    aspect-ratio: 16 / 10;
+}
+
+.emergency-gallery .hospital-slide figcaption {
+    position: static;
+    display: block;
+    max-width: none;
+    margin: 0;
+    padding: 12px 18px 30px;
+    background: #f2f7f3;
+    border: 0;
+    border-radius: 0;
+    min-height: 58px;
+    font-size: 12px;
+}
+
+.emergency-gallery .slide-toolbar {
+    bottom: 10px;
+}
+
+.emergency-gallery .slide-arrow {
+    top: 45%;
+}
+
+.emergency-facilities,
+.emergency-location {
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+}
+
+.emergency-facilities .eyebrow,
+.emergency-location .eyebrow {
+    margin-bottom: 12px;
+}
+
+.emergency-facilities h2,
+.emergency-location h2 {
+    font-size: 28px;
+    margin-bottom: 18px;
+}
+
+.emergency-facilities ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 26px;
+    padding-left: 18px;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.emergency-facilities li::marker {
+    color: #6b997b;
+}
+
+.emergency-sidebar {
+    position: sticky;
+    top: 110px;
+}
+
+.emergency-sidebar nav {
+    padding: 22px 18px;
+    background: #f0f6f2;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+}
+
+.emergency-sidebar h2 {
+    font-size: 19px;
+    margin-bottom: 18px;
+}
+
+.emergency-sidebar nav a {
+    display: block;
+    padding: 11px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+}
+
+.emergency-sidebar nav a:hover,
+.emergency-sidebar nav a[aria-current='page'] {
+    background: #166744;
+    color: white;
+}
+
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 900px) {
+    .emergency-intro {
+        gap: 26px;
+    }
+
+    .emergency-layout {
+        grid-template-columns: minmax(0, 1fr) 220px;
+        gap: 24px;
+    }
+}
+
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 700px) {
+    .emergency-intro,
+    .emergency-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .emergency-sidebar {
+        position: static;
+    }
+
+    .emergency-contact {
+        max-width: none;
+        justify-self: stretch;
+    }
+
+    .emergency-facilities ul {
+        grid-template-columns: 1fr;
+    }
+}

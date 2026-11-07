@@ -1,0 +1,129 @@
+/* Arsip alternatif gaya header; tidak digunakan pada tampilan aktif. */
+/* Header ringkas dengan navigasi bergaris, mengikuti referensi. */
+.header-v2 {
+    background: #fff;
+    border-bottom: 1px solid #e4ebe7;
+}
+
+.header-v2 .nav-wrap {
+    height: 88px;
+    gap: 32px;
+}
+
+.header-v2 .brand-group {
+    gap: 18px;
+}
+
+.header-v2 .hospital-brand {
+    color: #183e3a;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.header-v2 .hospital-brand .brand-logo {
+    width: 40px;
+    height: 44px;
+}
+
+.header-v2 .company-brand {
+    padding-left: 18px;
+}
+
+.header-v2 .company-brand span {
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    max-width: 138px;
+}
+
+.header-v2 .company-brand img {
+    width: 34px;
+    height: 40px;
+}
+
+.header-v2 .accreditation-mark {
+    width: 64px;
+    height: 50px;
+    padding-left: 14px;
+}
+
+.header-v2 .nav-wrap nav {
+    gap: 28px;
+    font-size: 13px;
+}
+
+.header-v2 .nav-wrap nav > a:not(.button) {
+    padding: 11px 0;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    background: transparent;
+    font-weight: 400;
+    color: #183e3a;
+}
+
+.header-v2 .nav-wrap nav > a.active,
+.header-v2 .nav-wrap nav > a:hover {
+    color: #167366;
+    border-bottom-color: #167366;
+    background: transparent;
+}
+
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 1050px) {
+    .header-v2 .nav-wrap {
+        height: 84px;
+    }
+
+    .header-v2 .nav-wrap nav {
+        top: 84px;
+        gap: 8px;
+    }
+}
+
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 520px) {
+    .header-v2 .nav-wrap {
+        height: 76px;
+        gap: 8px;
+    }
+
+    .header-v2 .nav-wrap nav {
+        top: 76px;
+    }
+
+    .header-v2 .brand-group {
+        gap: 8px;
+    }
+
+    .header-v2 .hospital-brand {
+        font-size: 11px;
+    }
+
+    .header-v2 .hospital-brand .brand-logo {
+        width: 28px;
+        height: 34px;
+    }
+
+    .header-v2 .company-brand {
+        padding-left: 8px;
+    }
+
+    .header-v2 .company-brand span {
+        font-size: 7px;
+        max-width: 84px;
+        letter-spacing: 0.02em;
+    }
+
+    .header-v2 .company-brand img {
+        width: 24px;
+        height: 30px;
+    }
+
+    .header-v2 .accreditation-mark {
+        width: 36px;
+        height: 36px;
+        padding-left: 6px;
+    }
+}

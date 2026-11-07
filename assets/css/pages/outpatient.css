@@ -1,0 +1,270 @@
+/* Tampilan Rawat Jalan, galeri foto, kartu poli, dan menu fasilitas. */
+/* Galeri berada dalam konten, dengan navigasi layanan di kanan. */
+.outpatient-page {
+    max-width: 1268px;
+    padding-top: 28px;
+    padding-bottom: 72px;
+}
+
+.outpatient-breadcrumb {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 30px;
+}
+
+.outpatient-breadcrumb span {
+    padding: 0 10px;
+}
+
+.outpatient-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 260px;
+    gap: 48px;
+    align-items: start;
+}
+
+.outpatient-heading h1 {
+    font-size: clamp(36px, 4vw, 52px);
+    margin-bottom: 14px;
+}
+
+.outpatient-heading .eyebrow {
+    margin-bottom: 12px;
+}
+
+.outpatient-gallery {
+    max-width: 940px;
+    margin: 24px 0;
+}
+
+.outpatient-photo {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--mint);
+}
+
+.outpatient-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.outpatient-photo-slider {
+    position: relative;
+    margin-top: 12px;
+}
+
+.outpatient-photo-track {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: #bdd0c4 transparent;
+    padding-bottom: 6px;
+}
+
+.outpatient-photo-track .outpatient-photo {
+    flex: 0 0 calc((100% - 12px) / 2);
+    scroll-snap-align: start;
+}
+
+.outpatient-photo-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    width: 32px;
+    height: 44px;
+    background: #fffffff0;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    color: var(--green);
+    font-size: 30px;
+    line-height: 1;
+}
+
+.outpatient-photo-arrow[data-gallery-prev] {
+    left: 8px;
+}
+
+.outpatient-photo-arrow[data-gallery-next] {
+    right: 8px;
+}
+
+.outpatient-photo-arrow:disabled {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.outpatient-description {
+    margin: 28px 0 32px;
+}
+
+.outpatient-description h2,
+.outpatient-clinics h2 {
+    font-size: 28px;
+    margin-bottom: 16px;
+}
+
+.outpatient-description p {
+    line-height: 1.9;
+}
+
+.clinic-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.clinic-card {
+    text-align: center;
+    padding: 24px 12px;
+    border: 0;
+    background: transparent;
+}
+
+.clinic-card:hover h3 {
+    color: var(--green);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.clinic-image {
+    width: 120px;
+    height: 120px;
+    outline: 1px solid #dce8df;
+    outline-offset: 3px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: transparent;
+    display: grid;
+    place-items: center;
+}
+
+.clinic-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.clinic-image > span {
+    font-size: 38px;
+    color: var(--green);
+}
+
+.clinic-card h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.clinic-link {
+    font-size: 11px;
+    color: var(--green);
+}
+
+.outpatient-layout > div {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.outpatient-sidebar {
+    grid-column: 2;
+    grid-row: 1;
+    position: sticky;
+    top: 110px;
+    margin-top: 180px;
+}
+
+.outpatient-sidebar nav {
+    padding: 22px 18px;
+    background: #f0f6f2;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+}
+
+.outpatient-sidebar h2 {
+    font-size: 19px;
+    margin-bottom: 18px;
+}
+
+.outpatient-sidebar nav a {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px;
+    font-size: 13px;
+    border-radius: 6px;
+}
+
+.outpatient-sidebar nav a:hover,
+.outpatient-sidebar nav a[aria-current='page'] {
+    background: #166744;
+    color: white;
+}
+
+.outpatient-help {
+    padding: 22px 18px;
+    margin-top: 18px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: white;
+}
+
+.outpatient-help h3 {
+    font-size: 20px;
+}
+
+.outpatient-help p {
+    font-size: 13px;
+}
+
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 900px) {
+    .outpatient-layout {
+        grid-template-columns: minmax(0, 1fr) 220px;
+        gap: 24px;
+    }
+
+    .clinic-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 700px) {
+    .outpatient-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .outpatient-layout > div,
+    .outpatient-sidebar {
+        grid-column: 1;
+        grid-row: auto;
+    }
+
+    .outpatient-sidebar {
+        position: static;
+        margin-top: 0;
+    }
+}
+
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 520px) {
+    .outpatient-photo-arrow {
+        width: 28px;
+    }
+
+    .outpatient-photo-track .outpatient-photo {
+        flex-basis: 85%;
+    }
+}

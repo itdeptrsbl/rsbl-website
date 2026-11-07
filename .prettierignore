@@ -1,0 +1,6 @@
+# Folder data dan library luar tidak ikut diformat.
+node_modules/
+assets/uploads/
+assets/branding/
+storage/
+package-lock.json

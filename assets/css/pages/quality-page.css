@@ -1,0 +1,216 @@
+/* Tampilan galeri dan perbesar gambar laporan mutu. */
+.quality-page {
+    background: radial-gradient(ellipse at 95% 0, #eaf4ed80, transparent 45%), #fff;
+}
+.quality-page .page-intro {
+    padding-bottom: 22px;
+}
+.quality-gallery {
+    padding-bottom: 72px;
+}
+.quality-gallery-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+    border-bottom: 1px solid var(--line);
+    padding: 20px 0 28px;
+    margin-bottom: 32px;
+}
+.quality-gallery-heading .eyebrow {
+    margin-bottom: 12px;
+}
+.quality-gallery-heading h2 {
+    font-size: clamp(26px, 3vw, 38px);
+    margin-bottom: 0;
+}
+.quality-gallery-heading > p {
+    max-width: 280px;
+    margin-bottom: 0;
+    font-size: 13px;
+}
+.quality-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px;
+}
+.quality-card {
+    min-width: 0;
+    border: 1px solid #dce8e0;
+    border-radius: 18px;
+    background: #fff;
+    overflow: hidden;
+    transition:
+        border-color 0.25s,
+        box-shadow 0.25s,
+        transform 0.25s;
+}
+.quality-card:hover,
+.quality-card:focus-within {
+    border-color: #9bbfae;
+    box-shadow: 0 16px 35px -22px #164d4445;
+    transform: translateY(-4px);
+}
+.quality-report-link {
+    display: block;
+    height: 100%;
+}
+.quality-image {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    padding: 20px;
+    background: #f2f6f2;
+    border-bottom: 1px solid #e6eee8;
+}
+.quality-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.quality-expand {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    background: #ffffffed;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    color: var(--green);
+}
+.quality-expand svg {
+    width: 20px;
+    height: 20px;
+}
+.quality-card-copy {
+    padding: 24px;
+    display: flex;
+    gap: 18px;
+}
+.quality-number {
+    color: #91ae9e;
+    font-size: 12px;
+    padding-top: 4px;
+}
+.quality-card-copy h3 {
+    font-size: 21px;
+    line-height: 1.4;
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+    overflow-wrap: anywhere;
+}
+.quality-view {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--green);
+    font-size: 12px;
+}
+.quality-view > span {
+    transition: transform 0.2s;
+}
+.quality-card:hover .quality-view > span {
+    transform: translate(2px, -2px);
+}
+.quality-dialog {
+    width: min(1200px, calc(100% - 32px));
+    max-width: none;
+    max-height: 90dvh;
+    padding: 24px;
+    border-radius: 18px;
+}
+.quality-dialog-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+.quality-dialog-heading h2 {
+    font-size: 22px;
+    line-height: 1.4;
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+.quality-dialog-heading button {
+    border: 0;
+    background: var(--mint);
+    color: var(--green);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 26px;
+    flex-shrink: 0;
+}
+.quality-dialog-actions {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 18px 0;
+    font-size: 12px;
+    color: var(--green);
+}
+.quality-dialog-actions button {
+    background: transparent;
+    color: inherit;
+    border: 0;
+    padding: 0;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+.quality-dialog-actions a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+.quality-dialog-image {
+    overflow: auto;
+    max-height: 65dvh;
+    background: #f6f8f5;
+    border-radius: 10px;
+}
+.quality-dialog-image img {
+    width: 100%;
+    height: auto;
+}
+.quality-dialog-image.is-zoomed img {
+    width: auto;
+    min-width: 150%;
+    max-width: none;
+}
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 600px) {
+    .quality-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+    .quality-gallery-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .quality-gallery-heading > p {
+        max-width: none;
+    }
+    .quality-image {
+        padding: 12px;
+    }
+    .quality-card-copy {
+        padding: 20px;
+    }
+    .quality-dialog {
+        padding: 16px;
+    }
+}
+/* Mengikuti pilihan pengguna yang ingin mengurangi gerakan animasi. */
+@media (prefers-reduced-motion: reduce) {
+    .quality-card,
+    .quality-view > span {
+        transition: none;
+    }
+    .quality-card:hover,
+    .quality-card:focus-within,
+    .quality-card:hover .quality-view > span {
+        transform: none;
+    }
+}

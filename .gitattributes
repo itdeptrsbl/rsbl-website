@@ -1,0 +1,9 @@
+# Menyeragamkan akhir baris teks tanpa mengubah berkas biner.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.webp binary
+*.mp4 binary
+*.webm binary
+*.sqlite binary
+*.zip binary

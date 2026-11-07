@@ -1,0 +1,31 @@
+WEBSITE RS BINTANG LAUT — PAKET REVIEW
+
+1. Ekstrak ZIP ini.
+2. Salin folder rsbl-website ke C:\xampp\htdocs\
+3. Jalankan Apache dari XAMPP Control Panel.
+4. Buka http://localhost/rsbl-website/
+5. Buat akun admin pada layar instalasi pertama.
+6. Review website. Login Pengelola ada di bagian paling bawah (footer).
+
+ALTERNATIF: klik start.bat, lalu buka http://localhost:8080
+PHP XAMPP harus ada di C:\xampp\php\php.exe untuk alternatif ini.
+
+Database SQLite dibuat otomatis. Tidak perlu import SQL.
+Jika database tidak tersedia: aktifkan extension=pdo_sqlite dalam
+C:\xampp\php\php.ini lalu restart Apache.
+Aktifkan extension=mbstring bila muncul error mb_substr.
+
+Untuk MySQL, baca README.md bagian Menggunakan MySQL XAMPP.
+Paket PHP native, tanpa Composer/Node.
+
+Dokter, jadwal, berita, promo masih contoh.
+Pendaftaran tersimpan sebagai PERMOHONAN, belum nomor antrean Medinfras.
+Jangan gunakan data pasien asli pada tahap review ini.
+
+Pengelolaan popup: Login > Master Konten > Popup.
+Pengelolaan berita/acara/promo: Login > Master Konten > pilih kategori.
+Logo/gambar beranda/kontak: Login > Pengaturan Website.
+Jadwal: Login > Dokter & Jadwal.
+Permohonan pasien: Login > Pendaftaran.
+
+Panduan lengkap, batas fitur, dan backup tersedia di README.md.

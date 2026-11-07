@@ -1,0 +1,2 @@
+# Menolak akses HTTP langsung ke file internal folder ini.
+Require all denied

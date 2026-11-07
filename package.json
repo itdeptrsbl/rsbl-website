@@ -1,0 +1,15 @@
+{
+    "devDependencies": {
+        "@prettier/plugin-php": "^0.26.0",
+        "prettier": "^3.9.10"
+    },
+    "name": "rsbl-website",
+    "private": true,
+    "scripts": {
+        "format": "prettier --write \"app/**/*.php\" \"views/**/*.php\" \"assets/**/*.css\" \"assets/**/*.js\" \"*.php\" \"*.json\" \"tools/*.mjs\"",
+        "format:check": "prettier --check \"app/**/*.php\" \"views/**/*.php\" \"assets/**/*.css\" \"assets/**/*.js\" \"*.php\" \"*.json\" \"tools/*.mjs\"",
+        "check": "node tools/check.mjs",
+        "test": "python tests/smoke.py",
+        "format:python": "python -m black tests/"
+    }
+}

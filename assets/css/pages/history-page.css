@@ -1,0 +1,303 @@
+/* Tampilan bagian sejarah, pemimpin, dan struktur organisasi. */
+.history-content {
+    padding-bottom: 40px;
+}
+.history-page {
+    background: radial-gradient(ellipse at 90% 0, #e5f1eb80, transparent 40%), #fff;
+    container-type: inline-size;
+}
+.history-page .history-intro {
+    padding-top: 48px;
+    padding-bottom: 30px;
+}
+.history-intro .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    letter-spacing: 0.18em;
+    margin-bottom: 14px;
+}
+.history-intro .eyebrow::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 4px #1673660b;
+}
+.history-intro h1 {
+    font-size: clamp(40px, 5vw, 60px);
+    color: var(--dark);
+    margin-bottom: 24px;
+    letter-spacing: -0.045em;
+}
+.history-page .history-content {
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+.history-page .history-block {
+    margin-bottom: 160px;
+}
+.history-page .history-video {
+    width: 100cqw;
+    height: min(56.25cqw, 600px);
+    aspect-ratio: auto;
+    margin-left: 50%;
+    translate: -50% 0;
+    border-radius: 0;
+    box-shadow: 0 12px 30px -20px #164d4430;
+    outline: none;
+}
+.history-page .history-copy {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.95;
+}
+.history-page .history-copy p:last-child {
+    margin-bottom: 0;
+}
+.history-page .history-section-title {
+    color: var(--dark);
+    font-size: clamp(30px, 3.4vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-bottom: 34px;
+    text-transform: uppercase;
+}
+.history-page .history-leader {
+    padding: 20px 10px 18px;
+    border-radius: 18px;
+    background: transparent;
+    transition:
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+.history-page .history-leader:hover {
+    background: #f2f7f3;
+    box-shadow: 0 10px 25px -20px #164d4450;
+}
+.history-page .history-leader .leader-photo-frame {
+    width: 224px;
+    margin-bottom: 10px;
+    outline: 1px solid #cbded2;
+    outline-offset: 5px;
+    box-shadow: 0 8px 18px -10px #164d4435;
+}
+.history-page .history-leader h3 {
+    color: var(--dark);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 10px 0 4px;
+}
+.history-page .history-leader-role {
+    color: var(--muted);
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+.history-page .history-leader-tenure {
+    display: inline-block;
+    color: #367163;
+    background: #eaf3ed;
+    border-radius: 8px;
+    padding: 5px 10px;
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.8;
+}
+.history-page .history-organization {
+    padding-top: 34px;
+    padding-bottom: 32px;
+    border-top: 1px solid #e0ebe3;
+}
+.history-page .history-organization .history-copy {
+    padding: 0 22px;
+}
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (max-width: 600px) {
+    .history-page .history-intro {
+        padding-top: 30px;
+        padding-bottom: 26px;
+    }
+    .history-page .history-block {
+        margin-bottom: 112px;
+    }
+    .history-page .history-section-title {
+        margin-bottom: 22px;
+    }
+    .history-page .history-leader {
+        padding: 14px 4px;
+    }
+    .history-page .history-leader h3 {
+        font-size: 16px;
+    }
+    .history-page .history-leader-role {
+        font-size: 12px;
+    }
+}
+/* Mengikuti pilihan pengguna yang ingin mengurangi gerakan animasi. */
+@media (prefers-reduced-motion: reduce) {
+    .history-page .history-leader {
+        transition: none;
+    }
+}
+.history-organization .history-width-20 {
+    width: 20%;
+}
+.history-organization .history-width-30 {
+    width: 30%;
+}
+.history-organization .history-width-40 {
+    width: 40%;
+}
+.history-organization .history-width-50 {
+    width: 50%;
+}
+.history-organization .history-width-60 {
+    width: 60%;
+}
+.history-organization .history-width-70 {
+    width: 70%;
+}
+.history-organization .history-width-80 {
+    width: 80%;
+}
+.history-organization .history-width-90 {
+    width: 90%;
+}
+.history-organization .history-width-100 {
+    width: 100%;
+}
+.history-block {
+    margin-bottom: 48px;
+}
+.history-section-title {
+    text-align: center;
+    font-size: clamp(24px, 3vw, 34px);
+    margin-bottom: 24px;
+}
+.history-description {
+    text-align: center;
+    max-width: 800px;
+    margin: -10px auto 24px;
+}
+.history-image {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    max-height: none;
+    margin: 0 auto;
+    border-radius: 14px;
+}
+.history-banner .history-image {
+    width: 100%;
+    max-height: 380px;
+    object-fit: cover;
+}
+.history-video {
+    display: block;
+    width: 100%;
+    max-width: none;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border: 0;
+    border-radius: 14px;
+    background: #153e38;
+    margin: 0 auto;
+}
+.history-copy {
+    max-width: 900px;
+    margin: 24px auto 0;
+    font-size: 16px;
+    line-height: 1.9;
+}
+.history-leaders {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 36px 28px;
+    max-width: 1164px;
+    margin: 0 auto;
+}
+.history-leader {
+    flex: 0 0 calc((100% - 84px) / 4);
+    text-align: center;
+}
+.history-leader > img {
+    width: 144px;
+    height: 144px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 30%;
+    margin: 0 auto 18px;
+}
+.history-leader.history-leader-size-96 > img {
+    width: 96px;
+    height: auto;
+    aspect-ratio: 1;
+}
+.history-leader.history-leader-size-120 > img {
+    width: 120px;
+    height: auto;
+    aspect-ratio: 1;
+}
+.history-leader.history-leader-size-144 > img {
+    width: 144px;
+    height: auto;
+    aspect-ratio: 1;
+}
+.history-leader.history-leader-size-168 > img {
+    width: 168px;
+    height: auto;
+    aspect-ratio: 1;
+}
+.history-leader.history-leader-size-192 > img {
+    width: 192px;
+    height: auto;
+    aspect-ratio: 1;
+}
+.history-leader h3 {
+    font-size: 19px;
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+.history-leader-role {
+    font-size: 13px;
+    line-height: 1.7;
+}
+.history-leader-tenure {
+    font-size: 12px;
+    line-height: 1.7;
+    margin-top: 8px;
+}
+.history-video {
+    object-fit: contain;
+}
+/* Penyesuaian tata letak untuk layar yang lebih kecil. */
+@media (min-width: 601px) and (max-width: 900px) {
+    .history-leader {
+        flex-basis: calc((100% - 56px) / 3);
+    }
+}
+.history-leader .doctor-history-text {
+    font-size: 13px;
+}
+@media (max-width: 600px) {
+    .history-block {
+        margin-bottom: 32px;
+    }
+    .history-leaders {
+        gap: 24px 16px;
+    }
+    .history-leader {
+        flex-basis: calc(50% - 8px);
+    }
+    .history-leader > img {
+        width: 112px;
+        height: 112px;
+    }
+    .history-leader h3 {
+        font-size: 16px;
+    }
+}
