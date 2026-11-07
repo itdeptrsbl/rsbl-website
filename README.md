@@ -55,8 +55,11 @@ Pada hosting HTTPS, aktifkan `secure_cookie` dalam `config.php`. Folder internal
 
 ## File yang disimpan di GitHub
 
-Repository berisi source code, aset bawaan, dokumentasi dan tes. Database lokal,
-foto/video hasil upload, backup, rahasia lingkungan dan `node_modules` diabaikan
-oleh `.gitignore`. Clone baru memulai instalasi dengan database kosong; konten
-master dan unggahan yang sudah ada perlu dipindahkan melalui backup privat
-terpisah jika ingin menyalin tampilan serta isi website saat ini.
+Sesuai permintaan pemilik, repository menyertakan seluruh isi proyek: source
+code, aset bawaan, foto/video upload, database SQLite lokal, backup kode,
+dokumentasi, tes dan `node_modules`. Folder `.git` adalah metadata Git dan tidak
+menjadi bagian konten commit.
+
+Clone repository membawa salinan database dan konten yang tersimpan pada saat
+commit. Perubahan data lewat website tidak otomatis tersinkron ke GitHub;
+perlu commit dan push berikutnya untuk memperbarui salinan repository.
