@@ -89,6 +89,18 @@ if ($page === 'doctor_profile') {
     }
 }
 
+// URL detail layanan lama dialihkan sebelum HTML dikirim.
+if ($page === 'detail') {
+    $legacyService =
+        query('SELECT * FROM contents WHERE id=? AND kind=? AND active=1', [
+            (int) ($_GET['id'] ?? 0),
+            'service',
+        ])[0] ?? null;
+    if ($legacyService) {
+        go(serviceUrl($legacyService));
+    }
+}
+
 require APP_ROOT . '/views/layouts/header.php';
 require APP_ROOT . '/views/public/dispatch.php';
 require APP_ROOT . '/views/layouts/footer.php';

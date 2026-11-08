@@ -13,7 +13,6 @@ foreach (facilityPhotoPages() as $slug => $facilityConfig) {
     <input type="hidden" name="action" value="facility_intro">
     <input type="hidden" name="service_page" value="<?= e($facilitySlug) ?>">
     <h2>Halaman <?= e($facilityTitle) ?></h2>
-    <p class="muted">Cukup isi penjelasan singkat dan unggah foto di bawah. Tidak perlu memasukkan jadwal, daftar tindakan, atau informasi tambahan.</p>
     <label>
         Penjelasan singkat (opsional)
         <textarea name="facility_intro" rows="5" maxlength="10000"><?= e(

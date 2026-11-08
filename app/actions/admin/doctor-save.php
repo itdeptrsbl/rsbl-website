@@ -82,7 +82,7 @@ if (
     throw new RuntimeException('Foto harus URL HTTPS atau unggahan lokal.');
 }
 
-$uploaded = uploadImage('image_file', 10);
+$uploaded = uploadImage('image_file');
 if ($uploaded !== '') {
     $image = $uploaded;
 }

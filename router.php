@@ -5,7 +5,7 @@ $path = rawurldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? '/');
 $asset =
     preg_match('~^/assets/(?:css|js)/(?:[a-zA-Z0-9_-]+/)*[a-zA-Z0-9_.-]+\.(css|js)$~', $path) ||
     preg_match(
-        '~^/assets/(?:(?:uploads|branding)/)?[a-zA-Z0-9_.-]+\.(svg|png|jpg|webp)$~',
+        '~^/assets/(?:(?:uploads|branding)/)?[a-zA-Z0-9_.-]+\.(svg|png|jpg|webp|avif)$~',
         $path,
     ) ||
     preg_match('~^/assets/uploads/[a-f0-9]{32}\.(mp4|webm)$~', $path);

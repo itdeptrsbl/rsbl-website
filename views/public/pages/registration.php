@@ -23,15 +23,14 @@
             <?php if ($error): ?><p class="notice error" role="alert"><?= e(
     $error,
 ) ?></p><?php endif; ?>
-            <p class="registration-status">Pendaftaran online sedang disiapkan. Untuk mendaftar saat ini, silakan <a href="index.php?page=contact">hubungi petugas</a>.</p>
             <noscript><p>Aktifkan JavaScript untuk menggunakan formulir bertahap ini.</p></noscript>
             <section data-step="0">
                 <p class="eyebrow">LANGKAH 1 DARI 4</p>
                 <h2>Kategori pendaftaran</h2>
                 <p>Pilih kategori sesuai rencana kunjungan Anda.</p>
                 <div class="registration-choices">
-                    <label><input type="radio" name="payment" value="Umum" required><strong>Umum</strong><small>Pendaftaran dengan biaya pribadi.</small></label>
-                    <label><input type="radio" name="payment" value="BPJS" required><strong>BPJS Kesehatan</strong><small>Lanjutkan melalui Mobile JKN.</small></label>
+                    <label><input type="radio" name="payment" value="Umum" required><strong>Umum</strong></label>
+                    <label><input type="radio" name="payment" value="BPJS" required><strong>BPJS Kesehatan</strong></label>
                 </div>
                 <div class="registration-jkn" data-jkn hidden>
                     <h3>Pendaftaran BPJS melalui Mobile JKN</h3>
@@ -53,7 +52,7 @@
                         ) ?>"></label>
                     </div>
                     <button type="button" class="button secondary" data-lookup>Cari data pasien</button>
-                    <p data-lookup-status role="status">Pencarian data pasien akan tersedia setelah integrasi Medinfras aktif.</p>
+                    <p data-lookup-status role="status"></p>
                 </div>
             </section>
             <section data-step="2" hidden>
@@ -69,7 +68,7 @@
 ) ?>" required disabled></label>
                     <label>Jadwal praktik<select name="session" required disabled><option value="">Pilih tanggal terlebih dahulu</option></select></label>
                 </div>
-                <p class="muted" data-schedule-status role="status">Jadwal praktik website sebagai referensi. Ketersediaan kuota menunggu integrasi Medinfras.</p>
+                <p class="muted" data-schedule-status role="status"></p>
                 <label>Catatan kunjungan (opsional)<textarea name="notes" rows="3" maxlength="1000" placeholder="Tuliskan catatan untuk petugas"></textarea></label>
             </section>
             <section data-step="3" hidden>

@@ -16,7 +16,6 @@ if ($error && ($_POST['action'] ?? '') === 'content_save') {
 ?>
 <fieldset class="slide-editor" data-slide-editor data-photo-kind="<?= e($kind) ?>">
     <legend>Sesuaikan tampilan foto</legend>
-    <p class="muted">Klik dan seret foto untuk mengatur posisi. Gunakan tombol minus atau plus untuk memperkecil atau memperbesar, lalu simpan konten.</p>
     <div class="form-grid">
         <label>
             Mode gambar
@@ -51,8 +50,7 @@ if ($error && ($_POST['action'] ?? '') === 'content_save') {
         <button type="button" class="button small" data-fit-photo>Pas-kan foto utuh</button>
         <button type="button" class="text-button" data-reset-display>Kembalikan posisi awal</button>
     </div>
-    <p class="muted">Mode foto utuh menjaga seluruh gambar terlihat. Jika proporsi foto berbeda dari bingkai, akan ada ruang kosong di sisi foto.</p>
-    <p class="muted" id="slide-drag-help">Seret foto untuk menggeser. Anda juga bisa memakai tombol panah saat foto dipilih.</p>
+    <p class="muted" id="slide-drag-help"></p>
     <div class="slide-preview <?= $kind === 'clinic'
         ? 'clinic-preview'
         : '' ?>" data-preview-frame tabindex="0" role="group" aria-label="Atur posisi foto" aria-describedby="slide-drag-help">

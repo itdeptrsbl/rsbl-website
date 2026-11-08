@@ -25,7 +25,6 @@ if ($error && ($_POST['action'] ?? '') === 'inpatient_save') {
     $roomData = inpatientRoomData($roomEdit);
 }
 ?>
-<div class="notice">Kelola penjelasan halaman, daftar ruang perawatan, dan jenis kamar dari sini. Satu jenis kamar memiliki foto utama, galeri foto, kapasitas tempat tidur, dan daftar fasilitas. Data ketersediaan tempat tidur tidak ditampilkan otomatis.</div>
 <form class="panel" method="post">
     <?= csrf() ?>
     <input type="hidden" name="action" value="inpatient_page">
@@ -134,7 +133,7 @@ if ($error && ($_POST['action'] ?? '') === 'inpatient_save') {
         ) ?></textarea>
     </label>
     <label>
-        Foto utama (JPG/PNG/WebP, maksimal 10 MB)
+        Foto utama (JPG/PNG/WebP, maksimal 25 MB)
         <input type="file" name="image_file" accept="image/jpeg,image/png,image/webp">
     </label>
     <?php field(
@@ -144,13 +143,11 @@ if ($error && ($_POST['action'] ?? '') === 'inpatient_save') {
         'text',
         false,
     ); ?>
-    <p class="muted">Foto utama menjadi sampul jenis kamar. Unggah foto baru hanya jika ingin menggantinya.</p>
     <?php
     $edit = $roomEdit;
     require APP_ROOT . '/views/admin/components/photo-editor.php';
     ?>
     <h3>Tambah foto galeri</h3>
-    <p class="muted">Klik + untuk menambahkan field foto baru. Setiap foto dapat diatur dan diberi keterangan sendiri, maksimal 10 MB per foto.</p>
     <div data-room-upload-list><?php
     $uploadIndex = 0;
     require APP_ROOT . '/views/admin/components/upload-row.php';
@@ -163,7 +160,6 @@ if ($error && ($_POST['action'] ?? '') === 'inpatient_save') {
         APP_ROOT . '/assets/js/admin/inpatient-photo-editor.js',
     ) ?>" defer>
     </script>
-    <p class="muted">Jumlah foto per kamar tidak dibatasi. Tambahkan foto bertahap dan simpan; foto lama tetap tersimpan. Maksimal 10 MB per foto. Centang foto yang ingin dihapus.</p>
     <div class="inpatient-master-photos inpatient-adjustable-photos">
         <?php foreach ($roomData['photos'] ?? [] as $photoIndex => $path): ?>
         <div>

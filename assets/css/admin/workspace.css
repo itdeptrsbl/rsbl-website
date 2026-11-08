@@ -1,0 +1,42 @@
+.admin-content-context {
+    margin-bottom: 24px;
+}
+.admin-content-context > p {
+    margin: 0 0 18px;
+    color: var(--muted);
+    max-width: 780px;
+}
+.admin-section-tabs {
+    padding: 14px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    gap: 8px;
+}
+.admin-section-tabs a {
+    border: 0;
+    background: #f3f7f4;
+    padding: 11px 15px;
+}
+.admin-section-tabs a.selected {
+    background: var(--green);
+    color: #fff;
+}
+.admin-main .panel > h2 {
+    font-size: 27px;
+}
+.admin-main .panel {
+    border-radius: 14px;
+}
+.sidebar nav {
+    display: grid;
+    gap: 4px;
+}
+.sidebar nav a {
+    padding: 11px 14px;
+}
+@media (min-width: 1051px) {
+    .admin-main {
+        max-width: 1600px;
+    }
+}

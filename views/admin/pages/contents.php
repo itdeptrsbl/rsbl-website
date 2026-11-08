@@ -1,35 +1,18 @@
 <?php
 // Memilih formulir master konten sesuai kategori yang sedang dibuka.
+?>
+<div class="admin-content-context">
+    <nav class="tab-row admin-section-tabs" aria-label="Bagian <?= e($modules[$tab]) ?>">
+        <?php foreach ($contentGroups[$tab] as $key): ?>
+        <a class="<?= $kind === $key ? 'selected' : '' ?>" href="index.php?page=admin&amp;tab=<?= e(
+    $tab,
+) ?>&amp;kind=<?= e($key) ?>" <?= $kind === $key ? 'aria-current="page"' : '' ?>><?= e(
+    $kinds[$key],
+) ?></a>
+        <?php endforeach; ?>
+    </nav>
+</div>
 
-if (
-    !in_array(
-        $kind,
-        array_merge(
-            ['service_slide', 'outpatient_photo', 'clinic', 'inpatient_room', 'emergency_photo'],
-            facilityPhotoKinds(),
-            informationKinds(),
-        ),
-        true,
-    )
-): ?>
-<div class="notice">
-    Slideshow beranda: pilih kategori
-    <strong>Slideshow Beranda</strong>
-    , unggah foto lebar, isi judul dan urutan. Minimal dua slide aktif untuk menampilkan tombol navigasi dan pergantian otomatis. Rekomendasi foto: 1920 × 800 piksel; hindari menaruh tulisan pada foto.
-</div>
-<?php endif; ?>
-<div class="tab-row">
-    <?php foreach ($kinds as $key => $label): ?>
-<?php if ($tab === 'information' && !in_array($key, informationKinds(), true)) {
-    continue;
-} ?>
-    <a class="<?= $kind === $key
-        ? 'selected'
-        : '' ?>" href="index.php?page=admin&amp;tab=<?= $tab === 'information'
-    ? 'information'
-    : 'contents' ?>&amp;kind=<?= e($key) ?>"><?= $label ?></a>
-    <?php endforeach; ?>
-</div>
 <?php
 $edit =
     query('SELECT * FROM contents WHERE id=? AND kind=?', [(int) ($_GET['edit'] ?? 0), $kind])[0] ??
@@ -94,7 +77,7 @@ if ($error && ($_POST['action'] ?? '') === 'content_save') {
             'text',
             $kind !== 'slide',
         );
-        if ($kind !== 'partner') {
+        if (!in_array($kind, ['partner', 'service'], true)) {
             field(
                 'subtitle',
                 'Label / subjudul (opsional)',
@@ -104,14 +87,16 @@ if ($error && ($_POST['action'] ?? '') === 'content_save') {
             );
         }
         ?></div>
+        <?php if ($kind !== 'service'): ?>
         <label>
-            Unggah gambar (JPG/PNG/WebP, maks. 10 MB)
+            Unggah gambar (JPG/PNG/WebP, maks. 25 MB)
             <input type="file" name="image_file" accept="image/jpeg,image/png,image/webp">
         </label>
+        <?php endif; ?>
         <?php if ($kind === 'slide') {
             require APP_ROOT . '/views/admin/components/photo-editor.php';
         } ?>
-<?php if ($kind !== 'partner'): ?>
+<?php if (!in_array($kind, ['partner', 'slide'], true)): ?>
         <label>
             Isi konten
             <textarea name="body" rows="5" maxlength="50000" <?= $kind === 'slide'
@@ -120,11 +105,23 @@ if ($error && ($_POST['action'] ?? '') === 'content_save') {
         </label>
         <?php endif; ?>
         <div class="form-grid"><?php
-        field('image', 'URL gambar HTTPS (opsional)', $edit['image'] ?? '', 'text', false);
+        if ($kind !== 'service') {
+            field('image', 'URL gambar HTTPS (opsional)', $edit['image'] ?? '', 'text', false);
+        }
         if ($kind !== 'partner') {
-            field('link', 'Tautan tujuan (opsional)', $edit['link'] ?? '', 'text', false);
-            field('starts', 'Mulai tayang (khusus popup)', $edit['starts'] ?? '', 'date', false);
-            field('ends', 'Akhir tayang (khusus popup)', $edit['ends'] ?? '', 'date', false);
+            if ($kind !== 'service') {
+                field('link', 'Tautan tujuan (opsional)', $edit['link'] ?? '', 'text', false);
+            }
+            if ($kind === 'popup') {
+                field(
+                    'starts',
+                    'Mulai tayang (khusus popup)',
+                    $edit['starts'] ?? '',
+                    'date',
+                    false,
+                );
+                field('ends', 'Akhir tayang (khusus popup)', $edit['ends'] ?? '', 'date', false);
+            }
             field(
                 'sort_order',
                 'Urutan tampil (angka kecil di depan)',
@@ -137,11 +134,13 @@ if ($error && ($_POST['action'] ?? '') === 'content_save') {
             <input type="checkbox" name="active" <?= $edit['active'] ?? 1 ? 'checked' : '' ?>>
             Aktif / dipublikasikan
         </label>
-        <p class="muted">Unggah gambar atau gunakan URL HTTPS. Unggahan baru diprioritaskan. Mitra aktif dengan gambar tampil di bagian paling bawah beranda. Periode tayang hanya berlaku untuk popup.</p>
+        
         <?php endif; ?>
         <div class="actions">
             <button class="button">Simpan konten</button>
-            <a href="index.php?page=admin&tab=contents&kind=<?= e($kind) ?>">Batal / tambah baru</a>
+            <a href="index.php?page=admin&tab=<?= e($tab) ?>&kind=<?= e(
+    $kind,
+) ?>">Batal / tambah baru</a>
         </div>
     </form>
 </div>
@@ -180,9 +179,9 @@ if ($error && ($_POST['action'] ?? '') === 'content_save') {
                 <?php endif; ?>
                 <td>
                     <div class="actions">
-                        <a href="index.php?page=admin&tab=contents&kind=<?= e(
-                            $kind,
-                        ) ?>&edit=<?= $row['id'] ?>">Edit</a>
+                        <a href="index.php?page=admin&tab=<?= e($tab) ?>&kind=<?= e(
+    $kind,
+) ?>&edit=<?= $row['id'] ?>">Edit</a>
                         <form method="post" enctype="multipart/form-data" data-confirm="Hapus konten ini?">
                             <?= csrf() ?>
                             <input type="hidden" name="action" value="content_delete">

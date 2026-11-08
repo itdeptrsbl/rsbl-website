@@ -7,7 +7,13 @@
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <meta name="robots" content="noindex">
         <title><?= e($modules[$tab]) ?> • Admin RSBL</title>
-        <link rel="stylesheet" href="assets/css/base.css">
+        <link rel="icon" href="assets/branding/hospital.png" type="image/png">
+        <link rel="stylesheet" href="assets/css/base.css?v=<?= filemtime(
+            APP_ROOT . '/assets/css/base.css',
+        ) ?>">
+        <link rel="stylesheet" href="assets/css/admin/workspace.css?v=<?= filemtime(
+            APP_ROOT . '/assets/css/admin/workspace.css',
+        ) ?>">
         <link rel="stylesheet" href="assets/css/admin/admin-partners.css?v=<?= filemtime(
             APP_ROOT . '/assets/css/admin/admin-partners.css',
         ) ?>">
@@ -29,7 +35,7 @@
     <body class="admin-body">
         <aside class="sidebar">
             <a class="brand" href="index.php?page=admin">
-                <span class="brand-symbol">✦</span>
+                <img class="brand-logo" src="assets/branding/hospital.png" alt="Logo RS Bintang Laut">
                 <span>
                     RS Bintang Laut
                     <small>PANEL PENGELOLA</small>
@@ -38,6 +44,15 @@
             <p class="eyebrow">WORKSPACE</p>
             <nav>
                 <?php foreach ($modules as $slug => $label): ?>
+                <?php if (
+                    $slug === 'contents' ||
+                    ($slug === 'extras' &&
+                        !(int) $db
+                            ->query("SELECT COUNT(*) FROM contents WHERE kind='page'")
+                            ->fetchColumn())
+                ) {
+                    continue;
+                } ?>
                 <a class="<?= $slug === $tab
                     ? 'selected'
                     : '' ?>" href="index.php?page=admin&tab=<?= $slug ?>"><?= e($label) ?></a>
@@ -69,7 +84,7 @@
 <?php require APP_ROOT . '/views/admin/pages/dashboard.php'; ?>
 <?php elseif ($tab === 'settings'): ?>
 <?php require APP_ROOT . '/views/admin/pages/settings.php'; ?>
-<?php elseif (in_array($tab, ['contents', 'information'], true)): ?>
+<?php elseif (isset($contentGroups[$tab])): ?>
 <?php require APP_ROOT . '/views/admin/pages/contents.php'; ?>
 <?php elseif ($tab === 'doctors'): ?>
 <?php require APP_ROOT . '/views/admin/pages/doctors.php'; ?>

@@ -18,7 +18,7 @@ header('X-Content-Type-Options: nosniff');
 header('X-Frame-Options: SAMEORIGIN');
 header('Referrer-Policy: strict-origin-when-cross-origin');
 header(
-    "Content-Security-Policy: default-src 'self'; img-src 'self' https: data: blob:; media-src 'self' https:; frame-src https://www.youtube-nocookie.com; style-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'",
+    "Content-Security-Policy: default-src 'self'; img-src 'self' https: data: blob:; media-src 'self' https:; frame-src https://www.youtube-nocookie.com https://www.google.com; style-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'",
 );
 require APP_ROOT . '/app/database/connection.php';
 require APP_ROOT . '/app/support/helpers.php';

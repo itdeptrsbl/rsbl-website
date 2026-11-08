@@ -582,3 +582,50 @@
         transform: none;
     }
 }
+
+/* Gerakan khusus daftar dokter; posisi foto dan tata letak tetap stabil. */
+@media (prefers-reduced-motion: no-preference) {
+    #doctors-list .doctor-card {
+        animation: doctor-directory-float 4.8s ease-in-out infinite;
+        transition:
+            transform 240ms ease,
+            box-shadow 240ms ease,
+            border-color 240ms ease;
+    }
+    #doctors-list .doctor-card:nth-child(3n + 2) {
+        animation-delay: -1.6s;
+    }
+    #doctors-list .doctor-card:nth-child(3n) {
+        animation-delay: -3.2s;
+    }
+    #doctors-list .doctor-cta span {
+        display: inline-block;
+        transition: transform 240ms ease;
+    }
+    #doctors-list .doctor-card:focus-within {
+        animation-play-state: paused;
+        transform: translateY(-4px);
+        box-shadow: 0 16px 32px #164d441a;
+        border-color: var(--green);
+    }
+    @media (hover: hover) {
+        #doctors-list .doctor-card:hover {
+            animation-play-state: paused;
+            transform: translateY(-4px);
+            box-shadow: 0 16px 32px #164d441a;
+            border-color: var(--green);
+        }
+        #doctors-list .doctor-card:hover .doctor-cta span {
+            transform: translateX(4px);
+        }
+    }
+}
+@keyframes doctor-directory-float {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+    50% {
+        translate: 0 -6px;
+    }
+}

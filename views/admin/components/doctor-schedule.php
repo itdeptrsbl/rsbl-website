@@ -16,7 +16,6 @@ $dayLabels = [
 <section data-schedule-editor>
     <input type="hidden" name="schedule_editor" value="1">
     <h3>Jadwal praktik</h3>
-    <p class="muted">Opsional. Kosongkan atau hapus semua sesi jika dokter tidak membuka praktik. Dokter tanpa jadwal tetap tampil di Daftar Dokter, tetapi tidak di Jadwal Dokter.</p>
     <div data-session-list><?php foreach ($sessions as $index => $session): ?>
             <?php require APP_ROOT . '/views/admin/components/doctor-session.php'; ?>
         <?php endforeach; ?></div>

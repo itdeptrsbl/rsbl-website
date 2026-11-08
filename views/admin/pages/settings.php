@@ -32,7 +32,6 @@
     }
     ?></div>
     <h2>Logo & gambar utama</h2>
-    <p class="muted">Logo rumah sakit, perusahaan, dan akreditasi tampil berdampingan pada header. Foto slideshow dikelola di Master Konten &rarr; Slideshow Beranda.</p>
     <div class="form-grid">
         <img class="admin-logo-preview" src="<?= e(
             brandingImage('company_image', 'assets/branding/hospital.png'),
@@ -43,11 +42,11 @@
     </div>
     <div class="form-grid">
         <label>
-            Logo perusahaan (maks. 10 MB)
+            Logo perusahaan (maks. 25 MB)
             <input type="file" name="company_file" accept="image/jpeg,image/png,image/webp">
         </label>
         <label>
-            Logo akreditasi (maks. 10 MB)
+            Logo akreditasi (maks. 25 MB)
             <input type="file" name="accreditation_file" accept="image/jpeg,image/png,image/webp">
         </label>
     </div>
@@ -61,11 +60,11 @@
     </label>
     <div class="form-grid">
         <label>
-            Upload logo (JPG/PNG/WebP, maks. 10 MB)
+            Upload logo (JPG/PNG/WebP, maks. 25 MB)
             <input type="file" name="logo_file" accept="image/jpeg,image/png,image/webp">
         </label>
         <label>
-            Upload gambar utama (maks. 10 MB)
+            Upload gambar utama (maks. 25 MB)
             <input type="file" name="hero_file" accept="image/jpeg,image/png,image/webp">
         </label>
     </div>

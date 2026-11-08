@@ -141,7 +141,7 @@ function saveInpatient(string $action): void
     // Menambahkan foto baru setelah data dan pengaturan formulir dinyatakan valid.
     $files = $_FILES['room_photos'] ?? null;
     $cover = $existing['image'] ?? '';
-    $uploaded = uploadImage('image_file', 10);
+    $uploaded = uploadImage('image_file');
     if ($uploaded !== '') {
         $cover = $uploaded;
     }
@@ -155,7 +155,7 @@ function saveInpatient(string $action): void
                     'error' => $files['error'][$index],
                     'size' => $files['size'][$index],
                 ];
-                $path = uploadImage('inpatient_photo_upload', 10);
+                $path = uploadImage('inpatient_photo_upload');
                 if ($path !== '') {
                     $photos[] = $path;
                     $photoCaptions[] = trim($newCaptions[$index] ?? '');

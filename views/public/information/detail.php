@@ -1,9 +1,18 @@
 <?php
 // Halaman lengkap informasi dengan isi, video, dan galeri foto.
 
-$informationImages = informationPhotos($item); ?>
+$informationImages = informationPhotos($item);
+$informationCategory = in_array($item['kind'], ['promo', 'career'], true) ? $item['kind'] : 'news';
+$informationBackLabel = match ($informationCategory) {
+    'promo' => 'Semua promo',
+    'career' => 'Semua karier',
+    default => 'Semua berita & acara',
+};
+?>
 <section class="container section narrow">
-    <a class="text-link" href="index.php?page=news">&larr; Semua informasi</a>
+    <a class="text-link" href="index.php?page=news&amp;category=<?= e(
+        $informationCategory,
+    ) ?>">&larr; <?= e($informationBackLabel) ?></a>
     <p class="eyebrow">INFORMASI RUMAH SAKIT</p>
     <h1><?= e($item['title']) ?></h1>
     <div class="article-body information-body"><?= doctorHistory($item['body']) ?></div>

@@ -45,12 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <meta name="robots" content="noindex">
         <title>Login Pengelola</title>
+        <link rel="icon" href="assets/branding/hospital.png" type="image/png">
         <link rel="stylesheet" href="assets/css/base.css">
     </head>
     <body class="auth">
         <main class="auth-card">
             <a class="brand" href="index.php">
-                <span class="brand-symbol">✦</span>
+                <img class="brand-logo" src="assets/branding/hospital.png" alt="Logo RS Bintang Laut">
                 RS Bintang Laut
             </a>
             <p class="eyebrow">KHUSUS PENGELOLA</p>

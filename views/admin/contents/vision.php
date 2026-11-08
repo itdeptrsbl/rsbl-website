@@ -6,7 +6,6 @@ $visionData = $error && ($_POST['action'] ?? '') === 'vision_save' ? $_POST : vi
     <?= csrf() ?>
     <input type="hidden" name="action" value="vision_save">
     <h2>Visi, Misi, Janji, Motto &amp; Nilai-Nilai</h2>
-    <p class="muted">Kelola seluruh isi halaman di sini. Tambahkan poin Misi dan Nilai-Nilai dengan tombol +. Bagian yang kosong tidak ditampilkan di website.</p>
     <label>
         Visi
         <textarea name="vision" rows="4" maxlength="5000"><?= e(

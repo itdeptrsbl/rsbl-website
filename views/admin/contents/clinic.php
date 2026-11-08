@@ -1,7 +1,6 @@
 <?php
 // Master kartu poli dan penghubungnya ke field poliklinik dokter.
-?><div class="notice">Nama kartu dapat dibuat sesuai kebutuhan. Poli penghubung harus sama dengan field poliklinik pada dokter agar kartu membuka dokter yang tepat. Data dokter tidak diubah saat nama kartu diganti.</div>
-<form class="panel" method="post" enctype="multipart/form-data">
+?><form class="panel" method="post" enctype="multipart/form-data">
     <?= csrf() ?>
     <input type="hidden" name="action" value="content_save">
     <input type="hidden" name="id" value="<?= (int) ($edit['id'] ?? 0) ?>">
@@ -23,7 +22,7 @@
         <?php endforeach; ?>
     </datalist>
     <label>
-        Gambar kartu poli (JPG/PNG/WebP, maksimal 10 MB)
+        Gambar kartu poli (JPG/PNG/WebP, maksimal 25 MB)
         <input type="file" name="image_file" accept="image/jpeg,image/png,image/webp">
     </label>
     <input type="hidden" name="image" value="<?= e($edit['image'] ?? '') ?>">

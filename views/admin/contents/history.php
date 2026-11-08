@@ -42,7 +42,6 @@ if ($error && ($_POST['history_type'] ?? '') === 'organization') {
                 : '' ?>>
         </label>
         <?php if (!empty($historyVideoRow['link'])): ?>
-        <p class="muted">Video sudah tersimpan. Pilih file baru hanya untuk menggantinya.</p>
         <?php endif; ?>
         <label>
             Teks di bawah video (opsional)
@@ -58,7 +57,6 @@ if ($error && ($_POST['history_type'] ?? '') === 'organization') {
         <h2>Kepemimpinan</h2>
         <a class="button small" href="index.php?page=admin&amp;tab=contents&amp;kind=history&amp;new_leader=1#new-leader">+ Tambah pemimpin</a>
     </div>
-    <p class="muted">Ubah data melalui nama pemimpin. Foto maksimal 20 MB. Kosongkan tanggal akhir jika masih menjabat.</p>
     <?php
     $leaderEditors = $historyLeaders;
     if (
@@ -103,7 +101,7 @@ if ($error && ($_POST['history_type'] ?? '') === 'organization') {
             <input type="hidden" name="leader_upload_token" value="<?= e($leaderUploadToken) ?>">
             <input type="hidden" name="id" value="<?= (int) ($leader['id'] ?? 0) ?>">
             <label>
-                Foto pemimpin (JPG / PNG / WebP, maks. 20 MB)
+                Foto pemimpin (JPG / PNG / WebP, maks. 25 MB)
                 <input type="file" name="image_file" accept="image/jpeg,image/png,image/webp" <?= empty(
                     $leader['image']
                 ) && !$failed
@@ -147,7 +145,6 @@ if ($error && ($_POST['history_type'] ?? '') === 'organization') {
                         ) ?>" alt="Preview foto pemimpin">
                     </div>
                 </div>
-                <small>Seret foto untuk mengatur posisinya, atau gunakan tombol panah saat bingkai dipilih. Perbesar zoom untuk ruang geser lebih luas. Klik Simpan pemimpin untuk menerapkan.</small>
             </div>
             <div class="form-grid"><?php
             field('title', 'Nama dokter / pemimpin', $leader['title'] ?? '');
@@ -163,7 +160,6 @@ field(
     false,
 );
 ?></div>
-            <p class="muted">Boleh isi tahun saja (2007) atau tanggal lengkap (16 April 1995 / 16/04/1995). Tidak perlu melengkapi tanggal yang belum diketahui.</p>
             <label class="check">
                 <input type="checkbox" name="active" <?= $leader['active'] ?? 1 ? 'checked' : '' ?>>
                 Tampilkan pemimpin ini
@@ -183,7 +179,7 @@ field(
     endforeach;
     ?>
 <?php if (!$leaderEditors): ?>
-    <p>Belum ada pemimpin. Gunakan tombol + Tambah pemimpin.</p>
+    <p>Belum ada data pemimpin.</p>
     <?php endif; ?>
 </section>
 <script src="assets/js/admin/leader-photo-preview.js?v=<?= filemtime(
@@ -200,14 +196,13 @@ field(
         <input type="hidden" name="title" value="Struktur Organisasi PT">
         <input type="hidden" name="active" value="1">
         <label>
-            Gambar struktur organisasi (JPG / PNG / WebP, maks. 20 MB)
+            Gambar struktur organisasi (JPG / PNG / WebP, maks. 25 MB)
             <input type="file" name="image_file" accept="image/jpeg,image/png,image/webp">
         </label>
         <?php if (!empty($organizationRow['image'])): ?>
         <img class="admin-partner-thumbnail" src="<?= e(
             photo($organizationRow['image']),
         ) ?>" alt="Struktur organisasi saat ini">
-        <p class="muted">Kosongkan unggahan untuk mempertahankan gambar sebelumnya.</p>
         <?php endif; ?>
         <label>
             Teks (opsional)
@@ -228,7 +223,6 @@ field(
                 <?php endforeach; ?>
             </select>
         </label>
-        <p class="muted">Gambar tetap di tengah. Tinggi mengikuti proporsi gambar; ukuran otomatis menyesuaikan layar.</p>
         <button class="button">Simpan struktur organisasi</button>
     </form>
 </section>

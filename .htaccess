@@ -10,3 +10,8 @@ Require all denied
 <FilesMatch "^(config\.php|package\.json|package-lock\.json|requirements-dev\.txt|README\.md|CHANGELOG\.md|start\.bat|router\.php)$">
 Require all denied
 </FilesMatch>
+
+# Sajikan gambar AVIF dengan tipe media yang sesuai.
+<IfModule mod_mime.c>
+AddType image/avif .avif
+</IfModule>

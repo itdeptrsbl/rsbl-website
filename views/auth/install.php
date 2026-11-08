@@ -48,12 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <title>Instalasi • RS Bintang Laut</title>
+        <link rel="icon" href="assets/branding/hospital.png" type="image/png">
         <link rel="stylesheet" href="assets/css/base.css">
     </head>
     <body class="auth">
         <main class="auth-card">
             <a class="brand" href="index.php">
-                <span class="brand-symbol">✦</span>
+                <img class="brand-logo" src="assets/branding/hospital.png" alt="Logo RS Bintang Laut">
                 RS Bintang Laut
             </a>
             <p class="eyebrow">PERSIAPAN WEBSITE</p>

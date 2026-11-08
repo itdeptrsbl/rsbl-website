@@ -110,7 +110,7 @@ function field(
 function photo(string $url): string
 {
     return preg_match('~^https://[^\s]+$~i', $url) ||
-        preg_match('~^assets/uploads/[a-f0-9]{32}\.(jpg|png|webp)$~', $url)
+        preg_match('~^assets/uploads/[a-f0-9]{32}\.(jpg|png|webp|avif)$~', $url)
         ? $url
         : 'assets/care.svg';
 }
@@ -132,7 +132,7 @@ function scheduleMatches(array $doctor, string $date): bool
 
 // Unggah hanya gambar raster yang lolos pemeriksaan tipe dan dimensi, tanpa SVG atau kode.
 // Memvalidasi ukuran dan tipe gambar, lalu menyimpan unggahan dengan nama acak.
-function uploadImage(string $field, int $maxMb = 10): string
+function uploadImage(string $field, int $maxMb = 25, bool $allowAvif = false): string
 {
     $file = $_FILES[$field] ?? null;
     if (!$file || $file['error'] === UPLOAD_ERR_NO_FILE) {
@@ -144,9 +144,13 @@ function uploadImage(string $field, int $maxMb = 10): string
 
     $size = @getimagesize($file['tmp_name']);
     $types = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
+    if ($allowAvif) {
+        $types['image/avif'] = 'avif';
+    }
     if (!$size || !isset($types[$size['mime']]) || $size[0] > 6000 || $size[1] > 6000) {
         throw new RuntimeException(
-            'Unggah JPG, PNG, atau WebP dengan dimensi maksimal 6000 piksel.',
+            ($allowAvif ? 'Unggah JPG, PNG, WebP, atau AVIF' : 'Unggah JPG, PNG, atau WebP') .
+                ' dengan dimensi maksimal 6000 piksel.',
         );
     }
 

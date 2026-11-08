@@ -15,7 +15,6 @@ if (!$facilitySlides) {
 <section class="facilities-hero" aria-label="Galeri fasilitas dan layanan">
     <div class="facilities-hero-heading">
         <div class="container">
-            <p class="facilities-eyebrow">RS BINTANG LAUT</p>
             <h1>Fasilitas dan Layanan</h1>
             <p>Hadir di setiap langkah perawatan Anda.</p>
         </div>

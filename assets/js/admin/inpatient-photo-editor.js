@@ -161,8 +161,8 @@ document.querySelectorAll('[data-room-upload-list]').forEach((list) => {
             status.textContent = '';
             input.setCustomValidity('');
             if (!file) return;
-            if (file.size > 10 * 1024 * 1024) {
-                status.textContent = 'Foto melebihi 10 MB. Pilih foto yang lebih kecil.';
+            if (file.size > 25 * 1024 * 1024) {
+                status.textContent = 'Foto melebihi 25 MB. Pilih foto yang lebih kecil.';
                 input.setCustomValidity(status.textContent);
                 return;
             }
@@ -225,4 +225,64 @@ document.querySelectorAll('[data-room-upload-list]').forEach((list) => {
     }
 
     list.querySelectorAll('[data-room-upload-row]').forEach(setupRow);
+});
+
+// Sampul memakai editor yang sama untuk foto tersimpan dan unggahan pengganti.
+document.querySelectorAll('[data-information-cover]').forEach((root) => {
+    const form = root.closest('form');
+    const input = form.elements.information_cover;
+    const status = form.querySelector('[data-information-cover-status]');
+    const image = root.querySelector('img');
+    const savedSource = image.getAttribute('src');
+    let sourceVersion = 0;
+    function updateCoverPreview() {
+        const version = ++sourceVersion;
+        const file = input.files[0];
+        input.setCustomValidity('');
+        status.textContent = '';
+        if (!file) {
+            image.src = savedSource;
+            root.hidden = savedSource === 'assets/room-placeholder.svg';
+            return;
+        }
+        const fail = (message) => {
+            if (version !== sourceVersion) return;
+            status.textContent = message;
+            input.setCustomValidity(message);
+            root.hidden = true;
+        };
+        const allowed = ['image/jpeg', 'image/png', 'image/webp', 'image/avif'];
+        const validType =
+            allowed.includes(file.type) ||
+            (!file.type && /\.(jpe?g|png|webp|avif)$/i.test(file.name));
+        if (file.size > 25 * 1024 * 1024 || !validType) {
+            fail('Pilih JPG/PNG/WebP/AVIF maksimal 25 MB.');
+            return;
+        }
+        status.textContent = 'Memuat pratinjau sampul...';
+        const reader = new FileReader();
+        reader.addEventListener('load', () => {
+            if (version !== sourceVersion) return;
+            image.onload = () => {
+                if (version !== sourceVersion) return;
+                if (image.naturalWidth > 6000 || image.naturalHeight > 6000) {
+                    fail('Dimensi gambar maksimal 6000 piksel.');
+                    return;
+                }
+                root.hidden = false;
+                status.textContent = `${image.naturalWidth} x ${image.naturalHeight} piksel. Seret foto untuk mengatur posisi sampul.`;
+            };
+            image.onerror = () =>
+                fail(
+                    'Foto tidak dapat ditampilkan. Coba ekspor sebagai JPG, PNG, atau WebP lalu pilih ulang.',
+                );
+            image.src = reader.result;
+        });
+        reader.addEventListener('error', () =>
+            fail('File foto tidak dapat dibaca. Pilih ulang file.'),
+        );
+        reader.readAsDataURL(file);
+    }
+    input.addEventListener('change', updateCoverPreview);
+    if (input.files.length) updateCoverPreview();
 });

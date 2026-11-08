@@ -3,13 +3,18 @@
 
 $isInformation = in_array($item['kind'] ?? '', informationKinds(), true);
 $cardPhotos = $isInformation ? informationPhotos($item) : [];
-$coverImage = $isInformation ? $cardPhotos[0]['src'] ?? '' : $item['image'];
+$coverImage = $item['image'];
+$coverDisplay = $isInformation
+    ? informationCoverDisplay((int) $item['id'])
+    : ['fit' => 'cover', 'zoom' => 100, 'x' => 50, 'y' => 50];
 ?>
 <article class="article-card">
     <a href="index.php?page=detail&amp;id=<?= (int) $item['id'] ?>">
         <div class="article-image tone-<?= $i % 3 ?>">
             <?php if ($coverImage !== ''): ?>
-            <img src="<?= e(photo($coverImage)) ?>" alt="<?= e($item['title']) ?>" loading="lazy">
+            <img data-slide-image data-display="<?= e(json_encode($coverDisplay)) ?>" src="<?= e(
+    photo($coverImage),
+) ?>" alt="<?= e($item['title']) ?>" loading="lazy">
             <?php else: ?>
             <div class="information-no-photo" aria-hidden="true">Informasi Rumah Sakit</div>
             <?php endif; ?>

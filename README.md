@@ -16,10 +16,10 @@ Konfigurasi database berada di `config.php`. SQLite disimpan di `storage/rsbl.sq
 ## Pengelolaan konten
 
 - Master Konten mengelola foto beranda, fasilitas, Rawat Jalan dan poli, Rawat Inap dan kamar, IGD, Farmasi, Radiologi, Fisioterapi, Laboratorium, sejarah, visi, laporan mutu, dan mitra.
-- Menu Informasi mengelola judul, isi, banyak foto dengan caption, dan video opsional.
+- Menu Informasi mengelola judul, isi, foto sampul khusus untuk kartu daftar, banyak foto isi dengan caption, dan video opsional.
 - Dokter & Jadwal mengelola profil, riwayat profesional, dan beberapa sesi praktik per dokter.
 - Form pendaftaran menggunakan empat langkah. Klien API Medinfras sudah disiapkan, tetapi pengiriman publik belum diaktifkan sampai koneksi vendor terverifikasi. Permohonan terdahulu tetap dapat dikelola pada panel Pendaftaran. Lihat [catatan integrasi Medinfras](docs/PENDAFTARAN-MEDINFRAS.md).
-- Format gambar: JPG/PNG/WebP, maksimal 6000 piksel. Batas umum 10 MB; gambar sejarah dan laporan mutu 20 MB. Video Informasi MP4/WebM 50 MB, video sejarah 20 MB.
+- Format gambar: JPG/PNG/WebP, maksimal 6000 piksel. Maksimal 25 MB per gambar. Video Informasi MP4/WebM 50 MB, video sejarah 20 MB.
 - `assets/uploads/` harus dapat ditulis oleh PHP. File lama tidak dihapus otomatis dari disk ketika tidak ditampilkan, agar tautan lain tetap aman.
 
 ## Struktur dan pengembangan

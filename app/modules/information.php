@@ -19,6 +19,17 @@ function informationPhotos(array $item): array
         : [];
 }
 
+// Pengaturan sampul memakai validasi posisi dan zoom yang sama dengan galeri.
+function informationCoverDisplay(int $id): array
+{
+    $saved = json_decode(setting('information_cover_display_' . $id, '{}'), true);
+    try {
+        return inpatientPhotoDisplay(is_array($saved) && $saved ? $saved : ['fit' => 'cover']);
+    } catch (RuntimeException $ex) {
+        return inpatientPhotoDisplay(['fit' => 'cover']);
+    }
+}
+
 // Mengambil video tersimpan hanya jika path unggahannya valid.
 function informationVideo(int $id): string
 {
@@ -108,7 +119,7 @@ function saveInformation(string $kind): void
                 foreach (['name', 'type', 'tmp_name', 'error', 'size'] as $key) {
                     $_FILES['information_upload'][$key] = $files[$key][$index];
                 }
-                $path = uploadImage('information_upload', 10);
+                $path = uploadImage('information_upload');
                 if ($path !== '') {
                     $photos[] = [
                         'src' => $path,
@@ -130,7 +141,19 @@ function saveInformation(string $kind): void
     if ($uploadedVideo !== '') {
         $video = $uploadedVideo;
     }
-    $cover = $photos[0]['src'] ?? '';
+    // Sampul disimpan terpisah dari galeri dan tidak berubah saat foto isi dihapus.
+    $cover = $old['image'] ?? '';
+    if (isset($_POST['remove_information_cover'])) {
+        $cover = '';
+    }
+    $uploadedCover = uploadImage('information_cover', 25, true);
+    if ($uploadedCover !== '') {
+        $cover = $uploadedCover;
+    }
+    $coverDisplay = inpatientPhotoDisplay(
+        $_POST['information_cover_display'] ??
+            ($old ? informationCoverDisplay((int) $old['id']) : ['fit' => 'cover']),
+    );
     $active = isset($_POST['active']) ? 1 : 0;
     // Menyimpan artikel dan daftar media sebagai satu perubahan database.
     $db->beginTransaction();
@@ -153,6 +176,7 @@ function saveInformation(string $kind): void
         }
         inpatientSetting('information_photos_' . $id, json_encode($photos));
         inpatientSetting('information_video_' . $id, $video);
+        inpatientSetting('information_cover_display_' . $id, json_encode($coverDisplay));
         $db->commit();
     } catch (Throwable $ex) {
         $db->rollBack();

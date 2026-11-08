@@ -28,7 +28,7 @@ require APP_ROOT . '/views/public/home/hero.php'; ?>
         <span>↗</span>
     </a>
 </div>
-<section class="section container">
+<section class="section container home-services">
     <div class="section-heading">
         <div>
             <p class="eyebrow">LAYANAN KESEHATAN</p>
@@ -40,9 +40,10 @@ require APP_ROOT . '/views/public/home/hero.php'; ?>
         </div>
         <a class="text-link" href="index.php?page=services">Lihat semua layanan ↗</a>
     </div>
-    <div class="grid four">
-        <?php foreach (array_slice(records('service'), 0, 4) as $i => $item): ?>
-        <a class="service-card" href="index.php?page=detail&id=<?= $item['id'] ?>">
+    <?php $homeServices = array_slice(records('service'), 0, 4); ?>
+    <div class="grid <?= count($homeServices) === 3 ? 'three' : 'four' ?>">
+        <?php foreach ($homeServices as $i => $item): ?>
+        <a class="service-card" href="<?= e(serviceUrl($item)) ?>">
             <span class="service-number">0<?= $i + 1 ?></span>
             <div class="service-icon"><?= ['✚', '⌂', '♡', '✧'][$i] ?></div>
             <h3><?= e($item['title']) ?></h3>
@@ -84,7 +85,7 @@ require APP_ROOT . '/views/public/home/hero.php'; ?>
     </div>
 </section>
 <section class="section container">
-    <div class="feature-banner">
+    <div class="feature-banner registration-banner">
         <div>
             <p class="eyebrow">LEBIH MUDAH DARI MANA SAJA</p>
             <h2>
@@ -99,10 +100,10 @@ require APP_ROOT . '/views/public/home/hero.php'; ?>
             </p>
             <a class="button light" href="index.php?page=register">Mulai Pendaftaran ↗</a>
         </div>
-        <span class="banner-art" aria-hidden="true">✦</span>
+
     </div>
 </section>
-<section class="section container compact-top">
+<section class="section container compact-top home-information">
     <div class="section-heading">
         <div>
             <p class="eyebrow">RUANG INFORMASI</p>

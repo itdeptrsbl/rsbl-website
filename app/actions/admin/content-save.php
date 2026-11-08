@@ -149,7 +149,7 @@ if (
 }
 
 // Unggahan baru menggantikan gambar lama hanya jika berkas berhasil diterima.
-$uploaded = uploadImage('image_file', in_array($kind, ['history', 'quality'], true) ? 20 : 10);
+$uploaded = uploadImage('image_file');
 if ($uploaded !== '') {
     $image = $uploaded;
     if ($kind === 'history' && $historyType === 'leader') {
@@ -181,7 +181,7 @@ if ($kind === 'clinic') {
 // Memeriksa tanggal tayang atau periode jabatan sesuai jenis konten.
 $start = $_POST['starts'] ?? '';
 if ($kind === 'quality' && $image === '') {
-    throw new RuntimeException('Unggah gambar laporan mutu (JPG, PNG, atau WebP; maksimal 20 MB).');
+    throw new RuntimeException('Unggah gambar laporan mutu (JPG, PNG, atau WebP; maksimal 25 MB).');
 }
 $end = $_POST['ends'] ?? '';
 if (
@@ -192,7 +192,7 @@ if (
     throw new RuntimeException('Isi jabatan dan tahun atau tanggal mulai menjabat.');
 }
 if ($kind === 'history' && $historyType === 'leader' && $image === '') {
-    throw new RuntimeException('Unggah foto pemimpin (maksimal 20 MB).');
+    throw new RuntimeException('Unggah foto pemimpin (maksimal 25 MB).');
 }
 if ($kind === 'history' && $historyType === 'leader') {
     $start = historyTenureValue($start);

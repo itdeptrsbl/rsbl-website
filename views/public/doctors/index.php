@@ -76,7 +76,7 @@ if ($clinicRequested) {
     <?php endif; ?>
 </section>
 <?php else: ?>
-<section class="page-intro container">
+<section class="page-intro container doctors-intro">
     <p class="eyebrow">TIM MEDIS</p>
     <h1><?= $page === 'doctors' ? 'Daftar Dokter' : 'Jadwal Dokter' ?></h1>
     <p class="lead"><?= $page === 'doctors'

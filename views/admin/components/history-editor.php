@@ -3,7 +3,6 @@
 
 $selectedType = $edit['history_type'] ?? historyType((int) ($edit['id'] ?? 0)); ?>
 <div data-history-editor>
-    <p class="muted">Susun halaman per bagian. Tambahkan setiap pemimpin sebagai satu data; pemimpin yang berurutan akan tampil berdampingan. Gunakan urutan kecil untuk bagian paling atas.</p>
     <label>
         Jenis bagian
         <select name="history_type" data-history-type>
@@ -24,10 +23,9 @@ $selectedType = $edit['history_type'] ?? historyType((int) ($edit['id'] ?? 0)); 
     ); ?></div>
     <div data-history-for="banner,timeline,leader,organization,video,text">
         <label>
-            Gambar / foto (JPG, PNG, WebP; maks. 20 MB)
+            Gambar / foto (JPG, PNG, WebP; maks. 25 MB)
             <input type="file" name="image_file" accept="image/jpeg,image/png,image/webp">
         </label>
-        <p class="muted">Untuk bagian video, gambar bersifat opsional dan menjadi poster video. Saat mengedit, kosongkan unggahan untuk mempertahankan file sebelumnya.</p>
         <?php if (!empty($edit['image'])): ?>
         <img class="admin-partner-thumbnail" src="<?= e(
             photo($edit['image']),
@@ -40,9 +38,7 @@ $selectedType = $edit['history_type'] ?? historyType((int) ($edit['id'] ?? 0)); 
             <input type="file" name="video_file" accept="video/mp4,video/webm">
         </label>
         <?php if (!empty($edit['link'])): ?>
-        <p class="muted">Video sudah tersimpan. Unggah file baru hanya jika ingin menggantinya.</p>
         <?php endif; ?>
-        <p class="muted">Video ditampilkan dengan kontrol pemutaran tanpa autoplay.</p>
     </div>
     <label>
         Teks tambahan (opsional)

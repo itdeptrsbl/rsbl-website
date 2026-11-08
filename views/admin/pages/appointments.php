@@ -19,7 +19,6 @@ $rows = query(
     $args,
 );
 ?>
-<div class="notice">Kode permohonan bukan nomor antrean. Perubahan status tidak mengirim notifikasi otomatis. Gunakan kontak pasien untuk konfirmasi.</div>
 <div class="tab-row">
     <a href="index.php?page=admin&tab=appointments">Semua (<?= $total ?>)</a>
     <?php foreach ($validStatuses as $s): ?>

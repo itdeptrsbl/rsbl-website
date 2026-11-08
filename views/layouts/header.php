@@ -58,9 +58,13 @@ $socialPlatforms = [
             APP_ROOT . '/assets/js/pages/registration.js',
         ) ?>" defer></script>
         <?php endif; ?>
-        <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-        <link rel="stylesheet" href="assets/css/base.css">
-        <link rel="stylesheet" href="assets/css/layout/header.css">
+        <link rel="icon" href="assets/branding/hospital.png" type="image/png">
+        <link rel="stylesheet" href="assets/css/base.css?v=<?= filemtime(
+            APP_ROOT . '/assets/css/base.css',
+        ) ?>">
+        <link rel="stylesheet" href="assets/css/layout/header.css?v=<?= filemtime(
+            APP_ROOT . '/assets/css/layout/header.css',
+        ) ?>">
         <link rel="stylesheet" href="assets/css/layout/social-icons.css">
         <link rel="stylesheet" href="assets/css/pages/doctors.css?v=<?= filemtime(
             APP_ROOT . '/assets/css/pages/doctors.css',
@@ -146,6 +150,11 @@ $socialPlatforms = [
             APP_ROOT . '/assets/js/components/inpatient-gallery.js',
         ) ?>" defer>
         </script>
+        <?php endif; ?>
+        <?php if (in_array($page, ['home', 'doctors'], true)): ?>
+        <script src="assets/js/pages/home-motion.js?v=<?= filemtime(
+            APP_ROOT . '/assets/js/pages/home-motion.js',
+        ) ?>" defer></script>
         <?php endif; ?>
         <script src="assets/js/core/app.js" defer>
         </script>
@@ -278,6 +287,40 @@ $socialPlatforms = [
                     </details>
                     <?php continue; ?>
                     <?php endif; ?>
+                    <?php if ($url === 'news'): ?>
+                    <?php
+                    $navInformationCategory = $_GET['category'] ?? 'news';
+                    if (
+                        !is_string($navInformationCategory) ||
+                        !in_array($navInformationCategory, ['news', 'promo', 'career'], true)
+                    ) {
+                        $navInformationCategory = 'news';
+                    }
+                    ?>
+                    <details class="doctor-menu information-menu" <?= $page === 'news'
+                        ? 'data-active'
+                        : '' ?>>
+                        <summary>Informasi</summary>
+                        <div class="doctor-submenu">
+                            <?php foreach (
+                                [
+                                    'news' => 'Berita & Acara',
+                                    'promo' => 'Promo',
+                                    'career' => 'Karier',
+                                ]
+                                as $informationKey => $informationLabel
+                            ): ?>
+                            <a href="index.php?page=news&amp;category=<?= e(
+                                $informationKey,
+                            ) ?>" <?= $page === 'news' &&
+$navInformationCategory === $informationKey
+    ? 'aria-current="page"'
+    : '' ?>><?= e($informationLabel) ?></a>
+                            <?php endforeach; ?>
+                        </div>
+                    </details>
+                    <?php continue; ?>
+                    <?php endif; ?>
                     <?php if ($url === 'doctors'): ?>
                     <details class="doctor-menu" <?= in_array(
                         $page,
@@ -302,6 +345,7 @@ $socialPlatforms = [
     ? 'aria-current="page"'
     : '' ?> href="index.php?page=<?= $url ?>"><?= $label ?></a>
                     <?php endforeach; ?>
+
                 </nav>
             </div>
         </header>

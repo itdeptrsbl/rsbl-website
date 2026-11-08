@@ -72,7 +72,7 @@
         );
         field('session').disabled = !sessions.length;
         form.querySelector('[data-schedule-status]').textContent = sessions.length
-            ? 'Jadwal praktik website sebagai referensi. Kuota belum terhubung ke Medinfras.'
+            ? ''
             : 'Belum ada jadwal praktik pada tanggal ini. Silakan pilih tanggal lain.';
     }
 

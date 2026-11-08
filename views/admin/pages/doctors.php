@@ -10,7 +10,6 @@ if ($error && ($_POST['action'] ?? '') === 'doctor_save') {
     $profile = $_POST;
 }
 ?>
-<div class="notice">Satu data dokter digunakan untuk Daftar Dokter, Profil Dokter, dan Jadwal Dokter. Isi riwayat di bawah dan jadwal praktik pada formulir yang sama.</div>
 <form class="panel" method="post" enctype="multipart/form-data">
     <?= csrf() ?>
     <input type="hidden" name="action" value="doctor_save">
@@ -22,7 +21,7 @@ if ($error && ($_POST['action'] ?? '') === 'doctor_save') {
     field('image', 'URL foto HTTPS (opsional)', $edit['image'] ?? '', 'text', false);
     ?></div>
     <label>
-        Unggah foto dokter (JPG/PNG/WebP, maks. 10 MB)
+        Unggah foto dokter (JPG/PNG/WebP, maks. 25 MB)
         <input type="file" name="image_file" accept="image/jpeg,image/png,image/webp">
     </label>
     <h3>Profil &amp; riwayat dokter</h3>

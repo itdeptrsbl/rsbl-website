@@ -12,22 +12,13 @@ foreach (facilityPhotoPages() as $facilityPage) {
 $photoKind = isset($photoLabels[$kind]) ? $kind : 'service_slide';
 $photoLabel = $photoLabels[$photoKind];
 ?>
-<div class="notice">Foto pada kategori ini tampil di galeri <?= e(
-    $photoLabel,
-) ?>. Cukup unggah foto, atur posisi, lalu simpan. <?= in_array(
-    $photoKind,
-    facilityPhotoKinds(),
-    true,
-)
-    ? 'Foto urutan 1 menjadi foto utama; pengunjung dapat memilih foto lain melalui thumbnail atau panah.'
-    : 'Tambahkan dua foto aktif atau lebih untuk pergantian otomatis.' ?></div>
 <form class="panel" method="post" enctype="multipart/form-data">
     <?= csrf() ?>
     <input type="hidden" name="action" value="content_save">
     <input type="hidden" name="id" value="<?= (int) ($edit['id'] ?? 0) ?>">
     <h2><?= empty($edit['id']) ? 'Tambah foto fasilitas' : 'Edit foto fasilitas' ?></h2>
     <label>
-        Foto fasilitas (JPG/PNG/WebP, maksimal 10 MB)
+        Foto fasilitas (JPG/PNG/WebP, maksimal 25 MB)
         <input type="file" name="image_file" accept="image/jpeg,image/png,image/webp" <?= empty(
             $edit['image']
         )

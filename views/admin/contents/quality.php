@@ -19,7 +19,7 @@ $qualityRows = query('SELECT * FROM contents WHERE kind=? ORDER BY id DESC', ['q
     <input type="hidden" name="active" value="1">
     <?php field('title', 'Judul laporan', $qualityEdit['title'] ?? ''); ?>
     <label>
-        Gambar laporan (JPG / PNG / WebP, maks. 20 MB)
+        Gambar laporan (JPG / PNG / WebP, maks. 25 MB)
         <input type="file" name="image_file" accept="image/jpeg,image/png,image/webp" <?= empty(
             $qualityEdit['image']
         )
@@ -30,7 +30,6 @@ $qualityRows = query('SELECT * FROM contents WHERE kind=? ORDER BY id DESC', ['q
     <img class="admin-quality-preview" src="<?= e(
         photo($qualityEdit['image']),
     ) ?>" alt="Gambar laporan saat ini">
-    <p class="muted">Kosongkan unggahan untuk mempertahankan gambar sebelumnya.</p>
     <?php endif; ?>
     <div class="actions">
         <button class="button">Simpan laporan</button>

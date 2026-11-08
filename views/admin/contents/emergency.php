@@ -8,7 +8,6 @@ if ($error && ($_POST['action'] ?? '') === 'emergency_save') {
     }
 }
 ?>
-<div class="notice">Perbarui kontak, jam layanan, penjelasan, dan fasilitas melalui formulir pertama. Foto dikelola terpisah di bawahnya. Nomor ambulans yang dikosongkan tidak ditampilkan; nomor IGD yang kosong menggunakan telepon rumah sakit.</div>
 <form class="panel" method="post">
     <?= csrf() ?>
     <input type="hidden" name="action" value="emergency_save">

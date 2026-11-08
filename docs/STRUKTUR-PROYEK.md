@@ -127,3 +127,8 @@ Python dapat dirapikan memakai Black dari `requirements-dev.txt`: `python -m bla
 Setiap file kode aplikasi memiliki catatan singkat tentang perannya. Fungsi PHP/JavaScript dan helper tes diberi komentar tujuan; bagian validasi, penyimpanan, unggahan, serta CSS responsif diberi penanda seperlunya.
 
 Komentar memakai `//` pada PHP/JavaScript, `/* ... */` pada CSS, dan `#` pada Python atau konfigurasi yang mendukungnya. Komentar template PHP tidak dicetak ke tampilan website. File JSON tidak diberi komentar karena sintaks JSON melarangnya: `package.json` menyimpan alat pengembangan dan perintah npm; `.prettierrc.json` mengatur formatter; `package-lock.json` mengunci versi dependency; `docs/file-migration-map.json` mencatat pemindahan file. Library di `node_modules/`, database, dan media unggahan tidak disunting untuk penambahan catatan ini.
+
+
+## Susunan panel pengelola
+
+Menu konten mengikuti bagian website: Beranda (slideshow, kartu layanan, mitra, popup), Fasilitas & Layanan (galeri, Rawat Jalan, poli, Rawat Inap, IGD, layanan penunjang), Tentang Rumah Sakit (sejarah, visi/misi, mutu), dan Informasi (berita, acara, promo, karier). Setiap kategori dikelola di satu kelompok. Halaman Tambahan hanya ditampilkan di sidebar bila ada data halaman mandiri. Konfigurasi kelompok berada di `app/config/admin.php`. Tautan lama `tab=contents&kind=...` tetap ditangani controller agar operasi simpan dan bookmark lama tetap berfungsi.

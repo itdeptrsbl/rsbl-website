@@ -445,3 +445,18 @@
 .slide-editor[data-photo-kind='laboratory_photo'] .slide-preview {
     aspect-ratio: 16 / 10;
 }
+
+/* Bingkai sampul berukuran tetap seperti kartu daftar informasi. */
+.information-cover-editor {
+    max-width: 380px;
+    margin: 16px 0;
+}
+.information-cover-editor .room-photo-adjust-frame {
+    aspect-ratio: auto;
+    height: 190px;
+}
+@media (max-width: 800px) {
+    .information-cover-editor .room-photo-adjust-frame {
+        height: 220px;
+    }
+}

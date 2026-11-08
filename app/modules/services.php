@@ -57,6 +57,21 @@ function facilityUrl(string $slug): string
     };
 }
 
+// Kartu layanan membuka halaman fasilitas yang sama dengan menu navigasi.
+function serviceUrl(array $item): string
+{
+    $title = mb_strtolower(trim($item['title'] ?? ''));
+    foreach (facilityCategories() as $slug => $category) {
+        if ($title === mb_strtolower($category['title'])) {
+            return facilityUrl($slug);
+        }
+    }
+    if (in_array($title, ['igd', 'rawat darurat'], true)) {
+        return facilityUrl('rawat-darurat');
+    }
+    return 'index.php?page=services';
+}
+
 // Empat layanan sederhana berbagi tampilan dan master, dengan data terpisah.
 // Konfigurasi empat layanan yang hanya memerlukan deskripsi dan galeri.
 function facilityPhotoPages(): array

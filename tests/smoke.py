@@ -128,6 +128,20 @@ with tempfile.TemporaryDirectory() as tmp:
             },
         )
         check("Ringkasan" in html and "Mulai mengelola" in html, "Login pengelola berhasil")
+        home_services = req("index.php?page=home")[1]
+        for legacy_id, route in [(1, "outpatient"), (2, "inpatient"), (3, "emergency")]:
+            check(f'class="service-card" href="index.php?page={route}"' in home_services,
+                  "Kartu layanan menuju halaman fasilitas " + route)
+            code, legacy_body, legacy_url = req("index.php?page=detail&id=" + str(legacy_id))
+            check(code == 200 and legacy_url.endswith("page=" + route),
+                  "Detail layanan lama dialihkan ke halaman aktif " + route)
+        for admin_group in ["home_content", "facilities", "about_content", "information"]:
+            _, grouped_admin, _ = req("index.php?page=admin&tab=" + admin_group)
+            check("admin-content-context" in grouped_admin and "Master Konten" not in grouped_admin,
+                  "Master dipisahkan berdasarkan bagian website " + admin_group)
+        _, service_form, _ = req("index.php?page=admin&tab=contents&kind=service")
+        check('name="image_file"' not in service_form and 'name="starts"' not in service_form,
+              "Form kartu layanan hanya menampilkan isian yang digunakan")
         asset_urls = set()
         for page in [
             "home",
@@ -470,7 +484,7 @@ with tempfile.TemporaryDirectory() as tmp:
             "Topbar memuat telepon dan WhatsApp tanpa slogan",
         )
         _, slide_form, _ = req("index.php?page=admin&tab=contents&kind=slide")
-        check('maxlength="50000" >' in slide_form, "Deskripsi slide opsional")
+        check('name="body"' not in slide_form, "Form slideshow tidak menampilkan isi konten yang tidak digunakan")
         for order in [1, 2]:
             _, slide_form, _ = req(
                 "index.php?page=admin&tab=contents&kind=slide",
@@ -1032,7 +1046,9 @@ with tempfile.TemporaryDirectory() as tmp:
         check(
             'name="action" value="information_save"' in info_form
             and "data-add-room-field" in info_form
-            and 'name="body"' in info_form,
+            and 'name="body"' in info_form
+            and 'name="information_cover"' in info_form
+            and 'data-field-prefix="information_cover_display"' in info_form,
             "Master informasi sederhana dengan field tambah foto",
         )
         info_fields = {
@@ -1054,10 +1070,14 @@ with tempfile.TemporaryDirectory() as tmp:
             info_parts.append(
                 f'--{info_boundary}\r\nContent-Disposition: form-data; name="{key}"\r\n\r\n{value}\r\n'.encode()
             )
-        for field in ["room_photos[0]", "room_photos[5]"]:
+        avif_cover = base64.b64decode("AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABoAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQAMAAAAABNjb2xybmNseAABAA0AAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACJtZGF0EgAKCBgANogIaAwgMgwXgAAASAAABcavAMg=")
+        for field in ["information_cover", "room_photos[0]", "room_photos[5]"]:
+            media_type = "image/avif" if field == "information_cover" else "image/png"
+            filename = "cover.avif" if field == "information_cover" else "information.png"
+            payload = avif_cover if field == "information_cover" else image
             info_parts.append(
-                f'--{info_boundary}\r\nContent-Disposition: form-data; name="{field}"; filename="information.png"\r\nContent-Type: image/png\r\n\r\n'.encode()
-                + image
+                f'--{info_boundary}\r\nContent-Disposition: form-data; name="{field}"; filename="{filename}"\r\nContent-Type: {media_type}\r\n\r\n'.encode()
+                + payload
                 + b"\r\n"
             )
         info_parts.append(
@@ -1096,6 +1116,16 @@ with tempfile.TemporaryDirectory() as tmp:
             "Galeri informasi menampilkan caption dan ukuran masing-masing foto",
         )
         _, info_edit, _ = req("index.php?page=admin&tab=contents&kind=news&edit=" + info_id)
+        cover_match = re.search(r'<img src="(assets/uploads/[a-f0-9]{32}\.avif)" alt="Foto sampul informasi tersimpan"', info_edit)
+        check(cover_match is not None, "Sampul khusus tersimpan dan tampil di formulir")
+        cover_path = cover_match.group(1)
+        with browser.open(base + cover_path) as avif_response:
+            check(avif_response.read() == avif_cover, "Sampul AVIF valid tersimpan dan dapat dibuka sebagai aset publik")
+        check('data-slide-image data-display=' in req("index.php?page=news")[1]
+              and 'information-cover-full' not in req("index.php?page=news")[1],
+              "Sampul kembali memakai bingkai tetap")
+        check(cover_path in req("index.php?page=news")[1] and cover_path not in info_detail,
+              "Sampul tampil pada daftar informasi dan terpisah dari galeri isi")
         _, info_updated, _ = req(
             "index.php?page=admin&tab=contents&kind=news",
             {
@@ -1106,9 +1136,19 @@ with tempfile.TemporaryDirectory() as tmp:
                 "body": "Isi diperbarui",
                 "active": "1",
                 "remove_photos[]": ["0"],
+                "information_cover_display[fit]": "cover",
+                "information_cover_display[zoom]": "150",
+                "information_cover_display[x]": "30",
+                "information_cover_display[y]": "20",
             },
         )
         updated_detail = req("index.php?page=detail&id=" + info_id)[1]
+        _, fit_edit, _ = req("index.php?page=admin&tab=contents&kind=news&edit=" + info_id)
+        check('&quot;x&quot;:30' in fit_edit
+              and '&quot;x&quot;:30,&quot;y&quot;:20' in req("index.php?page=news")[1]
+              and '&quot;zoom&quot;:150' in req("index.php?page=news")[1]
+              and '<img style=' not in req("index.php?page=news")[1],
+              "Posisi geser dan zoom sampul tersimpan dan diterapkan di publik")
         check(
             "Foto kegiatan kedua" in updated_detail
             and "Foto awal &lt;aman&gt;" not in updated_detail
@@ -1119,6 +1159,8 @@ with tempfile.TemporaryDirectory() as tmp:
             '<video class="information-video"' in updated_detail,
             "Edit informasi mempertahankan video lama",
         )
+        check(cover_path in req("index.php?page=news")[1],
+              "Menghapus foto galeri mempertahankan sampul")
         _, removed_video, _ = req(
             "index.php?page=admin&tab=contents&kind=news",
             {
@@ -1129,12 +1171,16 @@ with tempfile.TemporaryDirectory() as tmp:
                 "body": "Isi diperbarui",
                 "active": "1",
                 "remove_information_video": "1",
+                "remove_information_cover": "1",
             },
         )
         check(
             '<video class="information-video"' not in req("index.php?page=detail&id=" + info_id)[1],
             "Video informasi dapat dihapus tanpa menghapus foto",
         )
+        check(cover_path not in req("index.php?page=news")[1]
+              and "Foto kegiatan kedua" in req("index.php?page=detail&id=" + info_id)[1],
+              "Menghapus sampul tidak menghapus foto galeri")
         size_script = "require 'app/modules/information.php'; $_FILES['information_video']=['error'=>0,'size'=>52428801]; try { uploadInformationVideo(); } catch (RuntimeException $e) { echo $e->getMessage(); }"
         result = subprocess.run(
             [args.php, "-r", size_script], cwd=target, capture_output=True, text=True

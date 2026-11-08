@@ -585,11 +585,20 @@ footer {
     font-size: 10px;
     color: var(--muted);
 }
-.floating-help {
+.floating-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
     position: fixed;
     right: 22px;
     bottom: 22px;
     z-index: 15;
+}
+.floating-help,
+.floating-register {
+    display: block;
+    text-align: center;
     background: #fff;
     border: 1px solid var(--line);
     box-shadow: 0 5px 25px #173e391a;
@@ -1280,7 +1289,7 @@ legend {
         gap: 12px;
         padding-bottom: 85px;
     }
-    .floating-help {
+    .floating-actions {
         right: 14px;
         bottom: 14px;
     }
@@ -1415,4 +1424,353 @@ legend {
     margin: 20px 0;
     border-radius: 10px;
     background: #10271f;
+}
+
+/* Foto memenuhi banner; gradasi hijau menjaga keterbacaan tulisan. */
+.registration-banner {
+    min-height: 365px;
+    display: flex;
+    align-items: center;
+    isolation: isolate;
+    background: #164d44;
+    background-position: center 45%;
+}
+.registration-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(
+        90deg,
+        rgba(10, 54, 45, 0.96) 0%,
+        rgba(13, 61, 51, 0.88) 34%,
+        rgba(14, 63, 52, 0.55) 58%,
+        rgba(12, 49, 41, 0.12) 100%
+    );
+}
+.registration-banner > div {
+    max-width: 590px;
+}
+.registration-banner h2 {
+    color: #fff;
+}
+.registration-banner p {
+    color: #ecf5ef;
+}
+.registration-banner .eyebrow {
+    color: #cee7d8;
+}
+@media (max-width: 1050px) {
+    .registration-banner h2 {
+        font-size: 30px;
+    }
+    .registration-banner p br {
+        display: none;
+    }
+}
+@media (max-width: 700px) {
+    .registration-banner {
+        min-height: 390px;
+        background-position: 62% center;
+    }
+    .registration-banner::before {
+        background: linear-gradient(
+            90deg,
+            rgba(10, 54, 45, 0.94),
+            rgba(13, 61, 51, 0.74) 60%,
+            rgba(12, 49, 41, 0.42)
+        );
+    }
+}
+
+/* Gerak ringan pada tautan cepat dan kartu layanan beranda. */
+@media (prefers-reduced-motion: no-preference) {
+    .quick-links > a,
+    .home-services .service-card,
+    .hero-intro-description .button {
+        transition:
+            transform 240ms ease,
+            box-shadow 240ms ease,
+            background-color 240ms ease,
+            border-color 240ms ease;
+    }
+    .quick-links > a > span:last-child,
+    .home-services .service-icon {
+        transition: transform 260ms ease;
+    }
+    .quick-links > a:focus-visible,
+    .home-services .service-card:focus-visible,
+    .hero-intro-description .button:focus-visible {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 28px #164d441a;
+    }
+    @media (hover: hover) {
+        .quick-links > a:hover {
+            transform: translateY(-3px);
+        }
+        .quick-links > a:hover > span:last-child {
+            transform: translate(3px, -3px);
+        }
+        .home-services .service-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 16px 32px #164d4417;
+        }
+        .home-services .service-card:hover .service-icon {
+            transform: translateY(-3px) scale(1.08);
+        }
+        .hero-intro-description .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px #164d4424;
+        }
+    }
+}
+
+/* Ikon layanan tetap bergerak lembut setelah animasi masuk selesai. */
+@media (prefers-reduced-motion: no-preference) {
+    .home-services .service-icon {
+        width: fit-content;
+        position: relative;
+        transform-origin: center;
+        animation: service-icon-float 3.6s ease-in-out infinite;
+    }
+    .home-services .service-card:nth-child(2) .service-icon {
+        animation-delay: -1.2s;
+    }
+    .home-services .service-card:nth-child(3) .service-icon {
+        animation: service-icon-heartbeat 3.2s ease-in-out infinite;
+    }
+    .home-services .service-icon::before {
+        content: '';
+        position: absolute;
+        width: 42px;
+        height: 42px;
+        top: 50%;
+        left: 50%;
+        border-radius: 50%;
+        background: #1673660d;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+        pointer-events: none;
+    }
+    .home-services .service-card:hover .service-icon,
+    .home-services .service-card:focus-visible .service-icon {
+        animation-play-state: paused;
+    }
+}
+@keyframes service-icon-float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-7px);
+    }
+}
+@keyframes service-icon-heartbeat {
+    0%,
+    40%,
+    100% {
+        transform: scale(1);
+    }
+    12%,
+    28% {
+        transform: scale(1.18);
+    }
+    20% {
+        transform: scale(1.04);
+    }
+}
+
+/* Lapisan foto bergerak terpisah agar teks dan gradasi tetap stabil. */
+.registration-banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: url('../branding/registration-online.avif');
+    background-size: cover;
+    background-position: inherit;
+    background-repeat: no-repeat;
+    transform-origin: 70% 45%;
+    pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+    .registration-banner::after {
+        animation: registration-photo-drift 6s ease-in-out infinite alternate;
+    }
+    .registration-banner .button {
+        animation: registration-button-glow 3.6s ease-in-out infinite;
+        transition: transform 240ms ease;
+    }
+    .registration-banner .button:hover,
+    .registration-banner .button:focus-visible {
+        transform: translateY(-3px);
+        animation-play-state: paused;
+    }
+}
+@keyframes registration-photo-drift {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.085);
+    }
+}
+@keyframes registration-button-glow {
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 #c5f6d900;
+    }
+    50% {
+        box-shadow:
+            0 0 0 5px #c5f6d922,
+            0 6px 24px #072f4533;
+    }
+}
+
+/* Gerakan kartu informasi tidak mengubah posisi atau zoom foto sampul. */
+@media (prefers-reduced-motion: no-preference) {
+    .home-information .article-card {
+        animation: information-card-float 4.8s ease-in-out infinite;
+        transition:
+            transform 240ms ease,
+            box-shadow 240ms ease,
+            border-color 240ms ease;
+    }
+    .home-information .article-card:nth-child(2) {
+        animation-delay: -1.6s;
+    }
+    .home-information .article-card:nth-child(3) {
+        animation-delay: -3.2s;
+    }
+    .home-information .article-card:focus-within {
+        animation-play-state: paused;
+        transform: translateY(-4px);
+        border-color: var(--green);
+        box-shadow: 0 14px 30px #164d441a;
+    }
+    @media (hover: hover) {
+        .home-information .article-card:hover {
+            animation-play-state: paused;
+            transform: translateY(-4px);
+            border-color: var(--green);
+            box-shadow: 0 14px 30px #164d441a;
+        }
+    }
+}
+@keyframes information-card-float {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+    50% {
+        translate: 0 -6px;
+    }
+}
+
+/* Semua kartu informasi memiliki respons hover dan fokus yang sama. */
+.article-card {
+    transition:
+        box-shadow 240ms ease,
+        border-color 240ms ease;
+}
+.article-card:focus-within {
+    border-color: var(--green);
+    box-shadow: 0 14px 32px #164d4420;
+}
+@media (hover: hover) {
+    .article-card:hover {
+        border-color: var(--green);
+        box-shadow: 0 14px 32px #164d4420;
+    }
+}
+@media (prefers-reduced-motion: no-preference) {
+    .article-card {
+        transition:
+            transform 240ms ease,
+            box-shadow 240ms ease,
+            border-color 240ms ease;
+    }
+    .article-card:focus-within {
+        transform: translateY(-6px);
+    }
+    @media (hover: hover) {
+        .article-card:hover {
+            transform: translateY(-6px);
+        }
+    }
+}
+
+/* Pratinjau lokasi mengikuti lebar kolom footer pada semua ukuran layar. */
+.footer-map {
+    display: block;
+    width: 100%;
+    height: 190px;
+    margin: 0 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--mint);
+}
+
+.career-introduction {
+    display: flex;
+    align-items: flex-start;
+    gap: 22px;
+    margin: 0 0 32px;
+    padding: 30px;
+    border: 1px solid #d5e7de;
+    border-left: 4px solid var(--green);
+    border-radius: 16px;
+    background: linear-gradient(110deg, #edf6f0, #f9fcfa);
+}
+.career-notice-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 54px;
+    height: 54px;
+    border-radius: 15px;
+    background: #dceee3;
+    color: var(--green);
+}
+.career-notice-icon svg {
+    width: 30px;
+    height: 30px;
+}
+.career-introduction .career-notice-label {
+    margin-bottom: 8px;
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+.career-introduction h2 {
+    margin-bottom: 10px;
+    font-size: clamp(22px, 2.5vw, 28px);
+    font-weight: 700;
+    line-height: 1.3;
+}
+.career-introduction p {
+    margin: 0;
+    max-width: 760px;
+}
+@media (max-width: 600px) {
+    .career-introduction {
+        padding: 22px;
+        gap: 16px;
+        flex-direction: column;
+    }
+}
+
+.floating-register {
+    background: var(--green);
+    color: #fff;
+    border-color: var(--green);
+    font-weight: 600;
+}
+.floating-register:hover,
+.floating-register:focus-visible {
+    background: var(--dark);
+    border-color: var(--dark);
 }

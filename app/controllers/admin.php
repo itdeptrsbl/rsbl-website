@@ -11,13 +11,23 @@ if (!isset($modules[$tab])) {
     $tab = 'dashboard';
 }
 
-$kind = $_GET['kind'] ?? 'service';
+$kind = $_GET['kind'] ?? ($contentGroups[$tab][0] ?? 'slide');
 if (!isset($kinds[$kind])) {
     $kind = 'service';
 }
 
 if ($tab === 'information' && !in_array($kind, informationKinds(), true)) {
     $kind = 'news';
+}
+
+// Tautan master lama tetap membuka kelompok yang sesuai, termasuk saat menyimpan.
+if ($tab === 'contents' || isset($contentGroups[$tab])) {
+    foreach ($contentGroups as $group => $groupKinds) {
+        if (in_array($kind, $groupKinds, true)) {
+            $tab = $group;
+            break;
+        }
+    }
 }
 
 $error = '';

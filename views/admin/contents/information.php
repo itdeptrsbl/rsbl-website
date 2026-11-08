@@ -10,13 +10,40 @@ $storedItem =
     null;
 $informationImages = $storedItem ? informationPhotos($storedItem) : [];
 ?>
-<div class="notice">Tambahkan judul, isi, dan foto melalui formulir ini. Klik + untuk membuat field foto baru; setiap foto punya keterangan dan pengaturan sendiri. Centang Publikasikan, lalu Simpan informasi. Halaman daftar menampilkan sampul; semua foto tampil setelah informasi dibuka.</div>
 <form class="panel" method="post" enctype="multipart/form-data">
     <?= csrf() ?>
     <input type="hidden" name="action" value="information_save">
     <input type="hidden" name="id" value="<?= (int) ($edit['id'] ?? 0) ?>">
     <h2><?= empty($edit['id']) ? 'Tambah informasi' : 'Edit informasi' ?></h2>
     <?php field('title', 'Judul informasi', $edit['title'] ?? ''); ?>
+    <h3>Foto sampul</h3>
+    <label>
+        Unggah foto sampul (JPG/PNG/WebP/AVIF, maksimal 25 MB)
+        <input type="file" name="information_cover" accept="image/jpeg,image/png,image/webp,image/avif">
+    </label>
+    <p class="muted" data-information-cover-status role="status" aria-live="polite"></p>
+    <?php $coverDisplay =
+        $_POST['information_cover_display'] ??
+        ($storedItem ? informationCoverDisplay((int) $storedItem['id']) : ['fit' => 'cover']); ?>
+    <div class="information-cover-editor" data-information-cover data-room-adjust data-field-prefix="information_cover_display" data-display="<?= e(
+        json_encode($coverDisplay),
+    ) ?>" <?= empty($storedItem['image']) ? 'hidden' : '' ?>>
+        <img src="<?= e(
+            !empty($storedItem['image'])
+                ? photo($storedItem['image'])
+                : 'assets/room-placeholder.svg',
+        ) ?>" alt="Foto sampul informasi tersimpan">
+    </div>
+    <?php if (($storedItem['image'] ?? '') !== ''): ?>
+    <label class="check">
+        <input type="checkbox" name="remove_information_cover" <?= isset(
+            $_POST['remove_information_cover'],
+        )
+            ? 'checked'
+            : '' ?>>
+        Hapus foto sampul (unggahan baru akan menggantikannya)
+    </label>
+    <?php endif; ?>
     <div class="history-editor" data-history-editor>
         <label for="information-body">Isi informasi</label>
         <div class="history-editor-surface">
@@ -36,7 +63,6 @@ $informationImages = $storedItem ? informationPhotos($storedItem) : [];
         Unggah video MP4 / WebM, maksimal 50 MB
         <input type="file" name="information_video" accept="video/mp4,video/webm">
     </label>
-    <p class="muted">Kosongkan jika tidak ingin mengganti video lama. Video baru akan menggantikan video sebelumnya.</p>
     <?php $savedVideo = $storedItem ? informationVideo((int) $storedItem['id']) : ''; ?>
     <?php if ($savedVideo !== ''): ?>
     <video class="information-video" controls preload="metadata" playsinline src="<?= e(
@@ -48,7 +74,6 @@ $informationImages = $storedItem ? informationPhotos($storedItem) : [];
     </label>
     <?php endif; ?>
     <h3>Foto-foto informasi</h3>
-    <p class="muted">Foto opsional. Foto pertama menjadi sampul informasi. Klik + untuk menambahkan field foto, maksimal 10 MB per gambar.</p>
     <div class="inpatient-master-photos inpatient-adjustable-photos">
         <?php foreach ($informationImages as $photoIndex => $photo): ?>
         <div>
