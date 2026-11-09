@@ -72,12 +72,16 @@ if ($error && ($_POST['action'] ?? '') === 'content_save') {
         <div class="form-grid"><?php
         field(
             'title',
-            $kind === 'slide' ? 'Judul (opsional)' : 'Judul',
+            $kind === 'slide'
+                ? 'Judul (opsional)'
+                : ($kind === 'popup'
+                    ? 'Nama promosi (untuk pengelola)'
+                    : 'Judul'),
             $edit['title'] ?? '',
             'text',
             $kind !== 'slide',
         );
-        if (!in_array($kind, ['partner', 'service'], true)) {
+        if (!in_array($kind, ['partner', 'service', 'popup'], true)) {
             field(
                 'subtitle',
                 'Label / subjudul (opsional)',
@@ -87,6 +91,14 @@ if ($error && ($_POST['action'] ?? '') === 'content_save') {
             );
         }
         ?></div>
+        <?php if ($kind === 'popup'): ?>
+        <p class="muted">Popup menampilkan gambar promosi saja. Unggah poster yang sudah berisi tulisan; gambar tampil utuh tanpa dipotong. Tautan tujuan dan tanggal tayang bersifat opsional.</p>
+        <?php if (!empty($edit['image'])): ?>
+        <img class="popup-admin-preview" src="<?= e(
+            photo($edit['image']),
+        ) ?>" alt="Pratinjau poster promosi">
+        <?php endif; ?>
+        <?php endif; ?>
         <?php if ($kind !== 'service'): ?>
         <label>
             Unggah gambar (JPG/PNG/WebP, maks. 25 MB)
@@ -96,7 +108,7 @@ if ($error && ($_POST['action'] ?? '') === 'content_save') {
         <?php if ($kind === 'slide') {
             require APP_ROOT . '/views/admin/components/photo-editor.php';
         } ?>
-<?php if (!in_array($kind, ['partner', 'slide'], true)): ?>
+<?php if (!in_array($kind, ['partner', 'slide', 'popup'], true)): ?>
         <label>
             Isi konten
             <textarea name="body" rows="5" maxlength="50000" <?= $kind === 'slide'

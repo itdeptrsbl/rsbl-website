@@ -171,6 +171,15 @@ if (
     throw new RuntimeException('Unggah foto fasilitas atau masukkan URL gambar.');
 }
 
+// Popup promosi selalu berupa poster; teks lama tidak diteruskan ke tampilan publik.
+if ($kind === 'popup') {
+    if ($image === '') {
+        throw new RuntimeException('Unggah gambar promosi atau masukkan URL gambar HTTPS.');
+    }
+    $body = '';
+    $_POST['subtitle'] = '';
+}
+
 if ($kind === 'clinic') {
     $specialty = trim($_POST['subtitle'] ?? '');
     if ($specialty === '') {

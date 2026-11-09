@@ -775,12 +775,88 @@ dialog h2 {
     color: var(--ink);
     font-size: 28px;
 }
-.popup-image {
-    width: 100%;
-    max-height: 240px;
-    object-fit: cover;
+/* Popup poster mengikuti rasio asli gambar, tanpa panel teks atau pemotongan. */
+dialog.promo-poster-dialog {
+    width: fit-content;
+    max-width: min(860px, calc(100vw - 32px));
+    max-height: calc(100dvh - 48px);
+    padding: 0;
+    border: 0;
+    border-radius: 10px;
+    background: #fff;
+    overflow: visible;
+}
+.promo-poster-dialog .popup-image {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: min(860px, calc(100vw - 32px));
+    max-height: calc(100dvh - 120px);
+    object-fit: contain;
+    border-radius: 10px 10px 0 0;
+    margin: 0;
+}
+.promo-poster-link {
+    display: block;
+    border-radius: 10px;
+}
+/* Latar putih dan bayangan halus menjaga tombol tutup terbaca di atas poster. */
+.promo-poster-dialog .dialog-close {
+    display: grid;
+    place-items: center;
+    right: 8px;
+    top: 8px;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
     border-radius: 8px;
-    margin: 15px 0;
+    background: #fff;
+    color: #173d36;
+    font-size: 28px;
+    line-height: 1;
+    outline: none;
+    box-shadow: 0 2px 12px #173d362e;
+    cursor: pointer;
+    z-index: 1;
+}
+.promo-poster-dialog .dialog-close:hover {
+    background: #fff;
+}
+.promo-poster-dialog .dialog-close:focus-visible {
+    outline: none;
+    background: #fff;
+    box-shadow: 0 3px 16px #173d3666;
+}
+.promo-poster-link:focus-visible {
+    outline: 3px solid #17816c;
+    outline-offset: 3px;
+}
+/* Akses ke program kesehatan lain di sudut kiri bawah popup. */
+.promo-poster-footer {
+    padding: 14px 18px;
+    background: #f1f8f4;
+    border-radius: 0 0 10px 10px;
+    text-align: left;
+}
+.promo-poster-footer a {
+    color: #175d49;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.promo-poster-footer a:hover {
+    color: #0b4030;
+}
+.popup-admin-preview {
+    display: block;
+    max-width: min(100%, 420px);
+    max-height: 320px;
+    object-fit: contain;
+    margin: 16px 0;
+    border-radius: 8px;
 }
 .auth {
     min-height: 100vh;

@@ -149,6 +149,7 @@ $popups = records('popup');
 $popup = null;
 foreach ($popups as $candidate) {
     if (
+        $candidate['image'] !== '' &&
         ($candidate['starts'] === '' || $candidate['starts'] <= date('Y-m-d')) &&
         ($candidate['ends'] === '' || $candidate['ends'] >= date('Y-m-d'))
     ) {
@@ -157,17 +158,26 @@ foreach ($popups as $candidate) {
     }
 }
 if ($popup && setting('popup_enabled') === '1'): ?>
-<dialog id="promo-dialog" data-key="<?= e(hash('sha256', json_encode($popup))) ?>">
-    <button class="dialog-close" aria-label="Tutup informasi">×</button>
-    <?php if ($popup['image']): ?>
-    <img class="popup-image" src="<?= e(photo($popup['image'])) ?>" alt="<?= e($popup['title']) ?>">
+<!-- Poster tampil utuh; nama promosi hanya dipakai sebagai teks alternatif. -->
+<dialog id="promo-dialog" class="promo-poster-dialog" aria-label="Promosi rumah sakit" data-key="<?= e(
+    hash('sha256', json_encode($popup)),
+) ?>">
+    <button class="dialog-close" type="button" aria-label="Tutup promosi" autofocus>&times;</button>
+    <?php if ($popup['link'] !== ''): ?>
+    <a class="promo-poster-link" href="<?= e($popup['link']) ?>">
+        <img class="popup-image" src="<?= e(photo($popup['image'])) ?>" alt="<?= e(
+    $popup['title'] ?: 'Promosi RS Bintang Laut',
+) ?>">
+    </a>
+    <?php else: ?>
+    <img class="popup-image" src="<?= e(photo($popup['image'])) ?>" alt="<?= e(
+    $popup['title'] ?: 'Promosi RS Bintang Laut',
+) ?>">
     <?php endif; ?>
-    <p class="eyebrow"><?= e($popup['subtitle']) ?></p>
-    <h2><?= e($popup['title']) ?></h2>
-    <p><?= nl2br(e($popup['body'])) ?></p>
-    <a class="button" href="<?= e(
-        $popup['link'] ?: 'index.php?page=register',
-    ) ?>">Selengkapnya ↗</a>
+    <!-- Tautan informasi diletakkan terpisah agar poster tetap terbaca utuh. -->
+    <div class="promo-poster-footer">
+        <a href="index.php?page=news&amp;category=promo">Informasi program kesehatan lainnya <span aria-hidden="true">&rarr;</span></a>
+    </div>
 </dialog>
 <?php endif;
  ?>

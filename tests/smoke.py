@@ -23,6 +23,7 @@ from pathlib import Path
 parser = argparse.ArgumentParser()
 parser.add_argument("--php", default="php")
 parser.add_argument("--extension", action="append", default=[])
+parser.add_argument("--popup-only", action="store_true", help="Uji popup promosi saja")
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[1]
 with tempfile.TemporaryDirectory() as tmp:
@@ -128,6 +129,36 @@ with tempfile.TemporaryDirectory() as tmp:
             },
         )
         check("Ringkasan" in html and "Mulai mengelola" in html, "Login pengelola berhasil")
+        # Poster popup wajib bergambar dan tidak menampilkan panel teks lama.
+        popup_url = "index.php?page=admin&tab=home_content&kind=popup"
+        popup_form = req(popup_url)[1]
+        check('name="body"' not in popup_form and 'name="subtitle"' not in popup_form,
+              "Master popup hanya menyediakan pengaturan poster")
+        popup_data = {
+            "csrf": csrf(popup_form), "action": "content_save", "id": "0",
+            "title": "Poster promosi uji", "image": "", "link": "",
+            "active": "1", "sort_order": "-100", "starts": "", "ends": "",
+        }
+        invalid_popup = req(popup_url, popup_data)[1]
+        check("Unggah gambar promosi" in invalid_popup, "Popup tanpa gambar ditolak server")
+        popup_data.update({"csrf": csrf(invalid_popup),
+                           "image": "https://example.test/promo.png",
+                           "link": "index.php?page=contact"})
+        req(popup_url, popup_data)
+        # Aktifkan popup hanya pada database salinan tes, bukan database proyek.
+        with closing(sqlite3.connect(target / "storage" / "rsbl.sqlite")) as connection:
+            connection.execute("UPDATE settings SET value='1' WHERE name='popup_enabled'")
+            connection.commit()
+        popup_home = req("index.php")[1]
+        poster = re.search(r'<dialog id="promo-dialog".*?</dialog>', popup_home, re.S)
+        check(poster and 'https://example.test/promo.png' in poster.group(0)
+              and 'class="promo-poster-link"' in poster.group(0)
+              and '<h2' not in poster.group(0) and 'Selengkapnya' not in poster.group(0),
+              "Popup publik hanya berisi poster, tautan gambar, dan tombol tutup")
+
+        if args.popup_only:
+            print("SEMUA TES POPUP LULUS.")
+            raise SystemExit(0)
         home_services = req("index.php?page=home")[1]
         for legacy_id, route in [(1, "outpatient"), (2, "inpatient"), (3, "emergency")]:
             check(f'class="service-card" href="index.php?page={route}"' in home_services,
