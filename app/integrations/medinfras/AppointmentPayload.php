@@ -7,6 +7,11 @@ final class AppointmentPayload
     // $visit harus berasal dari sesi API yang sudah diverifikasi server, bukan POST mentah.
     public static function build(array $patient, array $visit, array $config): array
     {
+        // Dokumentasi hanya memastikan nilai 1 untuk bayar pribadi; jenis penjamin lain belum dipetakan.
+        $personalPayer = $patient['is_personal_payer'] ?? '1';
+        if ($personalPayer !== '1') {
+            throw new \InvalidArgumentException('Pilih jenis pembayaran yang tersedia.');
+        }
         $existing = ($patient['patient_type'] ?? '') === 'existing';
         if (!in_array($patient['patient_type'] ?? '', ['new', 'existing'], true)) {
             throw new \InvalidArgumentException('Pilih jenis pasien.');
@@ -47,7 +52,7 @@ final class AppointmentPayload
             'StartDate' => $date,
             'StartTime' => $visit['StartTime'],
             'Notes' => trim((string) ($patient['notes'] ?? '')),
-            'IsPersonalPayer' => '1',
+            'IsPersonalPayer' => $personalPayer,
             'ReferenceNo' => '',
             'BookingCode' => '',
             'ExternalPatientID' => '',

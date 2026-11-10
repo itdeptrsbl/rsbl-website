@@ -17,6 +17,9 @@ final class Client
     // Memeriksa kelengkapan konfigurasi tanpa menguji koneksi atau membuka rahasia.
     public function configured(): bool
     {
+        if (($this->config['enabled'] ?? true) === false) {
+            return false;
+        }
         $url = $this->config['base_url'] ?? '';
         $parts = parse_url($url);
         return is_array($parts) &&
@@ -42,10 +45,25 @@ final class Client
     }
 
     // Data pada beberapa respons berupa string JSON di dalam envelope JSON.
-    public static function decodeResponse(string $body): mixed
+    public static function decodeResponse(string $body, bool $allowEmptySchedule = false): mixed
     {
         try {
             $envelope = json_decode($body, true, 64, JSON_THROW_ON_ERROR);
+            // API rentang tanggal memakai FAILED untuk hasil kosong; kegagalan lain tetap ditolak.
+            if (
+                $allowEmptySchedule &&
+                is_array($envelope) &&
+                ($envelope['Status'] ?? '') === 'FAILED' &&
+                array_key_exists('Data', $envelope) &&
+                $envelope['Data'] === null &&
+                is_string($envelope['Remarks'] ?? null) &&
+                str_starts_with(
+                    $envelope['Remarks'],
+                    'There is no paramedic information with ScheduleDate ',
+                )
+            ) {
+                return [];
+            }
             if (
                 !is_array($envelope) ||
                 !in_array($envelope['Status'] ?? '', ['SUCCESS (000)', 'SUCCESS'], true)
@@ -72,6 +90,12 @@ final class Client
         return $this->get('healthcareserviceunit/base/list/department/outpatient');
     }
 
+    // Master penjamin dibaca saja; tidak membuat transaksi atau mengubah data perusahaan.
+    public function payers(): mixed
+    {
+        return $this->get('businesspartners/base/payer/list');
+    }
+
     // Filter memakai parameter yang dicontohkan koleksi; bukan ID dokter lokal.
     public function paramedics(string $specialtyName = ''): mixed
     {
@@ -87,7 +111,37 @@ final class Client
         return $this->get('paramedicschedule/base/all_schedule');
     }
 
-    // Hanya boleh dipakai setelah verifikasi pasien di controller, bukan endpoint publik langsung.
+    // Susunan parameter mengikuti contoh GET dalam koleksi Postman.
+    public function schedulesByParamedic(string $code): mixed
+    {
+        $this->validateCode($code);
+        return $this->get('ParamedicSchedule/base/list/param/;' . rawurlencode($code) . ';;;;');
+    }
+
+    // Kode tidak boleh menyisipkan path atau parameter endpoint lain.
+    private function validateCode(string $code): void
+    {
+        if (!preg_match('/^[A-Za-z0-9._-]{1,64}$/D', $code)) {
+            throw new \InvalidArgumentException('Kode Medinfras tidak valid.');
+        }
+    }
+
+    // Endpoint rentang tanggal pada koleksi mengembalikan jadwal untuk periode terpilih.
+    public function schedulesByDate(string $from, string $to): mixed
+    {
+        foreach ([$from, $to] as $value) {
+            $date = \DateTimeImmutable::createFromFormat('!Ymd', $value);
+            if (!$date || $date->format('Ymd') !== $value) {
+                throw new \InvalidArgumentException('Rentang tanggal jadwal tidak valid.');
+            }
+        }
+        if ($to < $from) {
+            throw new \InvalidArgumentException('Rentang tanggal jadwal terbalik.');
+        }
+        return $this->request('GET', 'ParamedicSchedule/list/' . $from . '/' . $to, [], null, true);
+    }
+
+    // Lookup MRN hanya dari server; controller memverifikasi tanggal lahir sebelum membuka data.
     public function patientByMedicalNumber(string $medicalNumber): mixed
     {
         if (!preg_match('/^[A-Za-z0-9-]{1,40}$/D', $medicalNumber)) {
@@ -147,6 +201,7 @@ final class Client
         string $path,
         array $query = [],
         ?array $payload = null,
+        bool $allowEmptySchedule = false,
     ): mixed {
         if (!$this->configured()) {
             throw new \RuntimeException('Konfigurasi Medinfras belum lengkap.');
@@ -180,7 +235,7 @@ final class Client
                 'Koneksi Medinfras belum berhasil. Silakan coba kembali nanti.',
             );
         }
-        return self::decodeResponse($body);
+        return self::decodeResponse($body, $allowEmptySchedule);
     }
 
     // Batasi waktu dan ukuran respons; TLS tetap diverifikasi dan tanpa retry otomatis.

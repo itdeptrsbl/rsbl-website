@@ -1,5 +1,5 @@
 <?php
-// Form bertahap: kategori, jenis pasien, jadwal kunjungan, dan identitas.
+// Form bertahap: kategori, kunjungan, data diri beserta jenis pasien, lalu pembayaran.
 ?>
 <section class="container registration-page">
     <header class="registration-heading">
@@ -10,15 +10,17 @@
     <div class="registration-shell">
         <ol class="registration-progress" aria-label="Tahapan pendaftaran">
             <?php foreach (
-                ['Kategori', 'Jenis pasien', 'Kunjungan', 'Data diri']
+                ['Kategori', 'Kunjungan', 'Data diri', 'Pembayaran']
                 as $index => $label
             ): ?>
             <li data-progress="<?= $index ?>"><span><?= $index + 1 ?></span><?= e($label) ?></li>
             <?php endforeach; ?>
         </ol>
-        <form method="post" data-registration data-doctors="<?= e(
-            json_encode($registrationDoctors),
-        ) ?>" data-selected-doctor="<?= (int) ($_GET['doctor_id'] ?? 0) ?>">
+        <form method="post" data-registration data-clinics-enabled="<?= $registrationClinicsEnabled
+            ? '1'
+            : '0' ?>" data-api-enabled="<?= $registrationApiEnabled
+    ? '1'
+    : '0' ?>" data-clinics-url="index.php?page=register&amp;registration_action=clinics">
             <?= csrf() ?>
             <?php if ($error): ?><p class="notice error" role="alert"><?= e(
     $error,
@@ -39,41 +41,34 @@
                 </div>
             </section>
             <section data-step="1" hidden>
-                <p class="eyebrow">LANGKAH 2 DARI 4</p><h2>Apakah Anda pernah berobat di sini?</h2>
-                <div class="registration-choices">
-                    <label><input type="radio" name="patient_type" value="new" required><strong>Pasien baru</strong><small>Belum memiliki nomor rekam medis.</small></label>
-                    <label><input type="radio" name="patient_type" value="existing" required><strong>Pasien lama</strong><small>Sudah memiliki nomor rekam medis.</small></label>
-                </div>
-                <div data-existing hidden>
-                    <div class="form-grid">
-                        <label>Nomor rekam medis<input name="medical_record_number" maxlength="40" autocomplete="off"></label>
-                        <label>Tanggal lahir untuk verifikasi<input type="date" name="verification_birth_date" max="<?= date(
-                            'Y-m-d',
-                        ) ?>"></label>
-                    </div>
-                    <button type="button" class="button secondary" data-lookup>Cari data pasien</button>
-                    <p data-lookup-status role="status"></p>
-                </div>
-            </section>
-            <section data-step="2" hidden>
-                <p class="eyebrow">LANGKAH 3 DARI 4</p><h2>Pilih jadwal kunjungan</h2>
+                <p class="muted" data-clinics-status role="status" aria-live="polite"></p>
+                <button type="button" class="text-link" data-clinics-retry hidden>Coba muat poli lagi</button>
+                <p class="eyebrow">LANGKAH 2 DARI 4</p><h2>Pilih jadwal kunjungan</h2>
                 <div class="form-grid">
-                    <label>Poli tujuan<select name="clinic" required><option value="">Pilih poli</option></select></label>
+                    <label>Poli tujuan<select name="clinic" required disabled><option value="">Pilih poli</option></select></label>
                     <label>Dokter<select name="doctor_id" required disabled><option value="">Pilih poli terlebih dahulu</option></select></label>
-                    <label>Tanggal kunjungan<input type="date" name="visit_date" min="<?= date(
+                    <div class="visit-date-field"><label for="visit-date">Tanggal kunjungan</label><input id="visit-date" type="date" name="visit_date" min="<?= date(
                         'Y-m-d',
                     ) ?>" max="<?= date(
     'Y-m-d',
     strtotime('+30 days'),
-) ?>" required disabled></label>
+) ?>" required disabled><div data-visit-calendar hidden></div></div>
                     <label>Jadwal praktik<select name="session" required disabled><option value="">Pilih tanggal terlebih dahulu</option></select></label>
                 </div>
                 <p class="muted" data-schedule-status role="status"></p>
                 <label>Catatan kunjungan (opsional)<textarea name="notes" rows="3" maxlength="1000" placeholder="Tuliskan catatan untuk petugas"></textarea></label>
             </section>
-            <section data-step="3" hidden>
-                <p class="eyebrow">LANGKAH 4 DARI 4</p><h2>Lengkapi data diri</h2>
-                <div class="registration-summary" data-summary></div>
+            <section data-step="2" hidden>
+                <p class="eyebrow">LANGKAH 3 DARI 4</p><h2>Lengkapi data diri</h2>
+                <p>Jenis pasien</p>
+                <div class="registration-choices">
+                    <label><input type="radio" name="patient_type" value="new" required><strong>Pasien baru</strong></label>
+                    <label><input type="radio" name="patient_type" value="existing" required><strong>Pasien lama</strong></label>
+                </div>
+                <!-- MRN hanya isian pasien lama; tidak ada pencarian atau verifikasi API. -->
+                <div data-existing hidden>
+                    <label>Nomor rekam medis<input name="medical_record_number" maxlength="40" pattern="[A-Za-z0-9-]{1,40}" autocomplete="off" disabled></label>
+                </div>
                 <div class="form-grid">
                     <?php
                     // Definisi ringkas menjaga nama field konsisten untuk pemetaan API nanti.
@@ -130,8 +125,20 @@
                     <?php endforeach; ?>
                 </div>
                 <label>Alamat lengkap (opsional)<textarea name="address" rows="3" maxlength="1000" autocomplete="street-address"></textarea></label>
+            </section>
+            <section data-step="3" hidden>
+                <p class="eyebrow">LANGKAH 4 DARI 4</p><h2>Jenis pembayaran</h2>
+                <!-- Pribadi selalu tersedia; kategori penjamin lainnya diambil dari master payer API. -->
+                <label>Jenis pembayaran<select name="payment_category" required><option value="">Pilih jenis pembayaran</option><option value="Pribadi">Pribadi</option></select></label>
+                <p class="muted" data-payment-status role="status" aria-live="polite"></p>
+                <button type="button" class="text-link" data-payment-retry hidden>Coba muat jenis pembayaran lagi</button>
+                <!-- Pilihan penjamin diisi dari kategori master payer; data kontrak tidak ditampilkan. -->
+                <div data-payer-fields hidden>
+                    <label><span data-payer-label>Penjamin</span><select name="payer_code" disabled><option value="">Pilih penjamin</option></select></label>
+                    <p class="muted" data-payer-status role="status" aria-live="polite"></p>
+                    <button type="button" class="text-link" data-payer-retry hidden>Coba lagi</button>
+                </div>
                 <label class="check"><input type="checkbox" name="consent" value="1" required>Saya menyetujui penggunaan data pribadi untuk proses pendaftaran dan konfirmasi kunjungan.</label>
-                <p class="muted">Pengiriman akan dibuka setelah integrasi Medinfras siap.</p>
             </section>
             <p class="registration-feedback" data-feedback role="status" aria-live="polite"></p>
             <div class="registration-actions">

@@ -135,13 +135,7 @@
     color: #89551a;
     font-size: 14px;
 }
-.registration-summary {
-    padding: 14px 18px;
-    border-radius: 8px;
-    background: #f3f7f5;
-    margin-bottom: 24px;
-    font-size: 14px;
-}
+
 .registration-shell input[readonly] {
     background: #f5f7f6;
 }
@@ -177,4 +171,104 @@
     .registration-page * {
         scroll-behavior: auto;
     }
+}
+
+/* Kalender kunjungan: tanggal tanpa sesi API tidak dapat dipilih. */
+[data-visit-calendar] {
+    max-width: 340px;
+    padding: 12px;
+    margin-top: 6px;
+    border: 1px solid #d5e3dc;
+    border-radius: 10px;
+    background: #fff;
+}
+.visit-calendar-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.visit-calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 4px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+[data-visit-calendar] button {
+    padding: 6px;
+    min-height: 36px;
+    border: 0;
+    border-radius: 6px;
+    background: #edf6f0;
+    color: #146347;
+    cursor: pointer;
+}
+[data-visit-calendar] button:disabled {
+    background: #f3f4f3;
+    color: #a4aba7;
+    cursor: default;
+}
+[data-visit-calendar] button[aria-pressed='true'] {
+    background: #146347;
+    color: #fff;
+}
+[data-visit-calendar] button:focus-visible {
+    outline: 2px solid #146347;
+    outline-offset: 2px;
+}
+
+/* Kolom tanggal tetap ringkas seperti input sebelumnya; kalender berupa popover. */
+.visit-date-field {
+    position: relative;
+    margin-bottom: 19px;
+}
+/* Label tanggal terpisah dari input; samakan jaraknya dengan label pembungkus select. */
+.visit-date-field > label {
+    margin-bottom: 0;
+}
+.registration-shell input[name='visit_date'],
+.registration-shell select[name='session'],
+.visit-date-trigger {
+    box-sizing: border-box;
+    height: 44px;
+    font-size: 14px;
+}
+.visit-date-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 42px;
+    margin-top: 6px;
+    padding: 10px 12px;
+    border: 1px solid #cbded5;
+    border-radius: 5px;
+    background: #fff;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+.visit-date-trigger::after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    background: linear-gradient(currentColor, currentColor) 0 3px / 100% 1px no-repeat;
+}
+.visit-date-trigger:disabled {
+    color: #89958f;
+    background: #f7f9f8;
+    cursor: default;
+}
+.visit-date-field [data-visit-calendar] {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 20;
+    width: min(310px, 100%);
+    box-sizing: border-box;
+    box-shadow: 0 5px 18px #143d2920;
 }

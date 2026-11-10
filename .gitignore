@@ -1,2 +1,5 @@
 # Sesuai permintaan pemilik, seluruh isi proyek disertakan dalam repository.
 # Folder .git dikelola Git sendiri dan tidak menjadi konten commit.
+
+# Konfigurasi API privat tidak boleh masuk repository atau browser.
+/storage/private/

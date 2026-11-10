@@ -31,7 +31,7 @@ with tempfile.TemporaryDirectory() as tmp:
     shutil.copytree(
         root,
         target,
-        ignore=shutil.ignore_patterns("node_modules", ".git", "backups", ".tools", "__pycache__"),
+        ignore=shutil.ignore_patterns("node_modules", ".git", "backups", ".tools", "__pycache__", "private"),
     )
     for f in (target / "storage").glob("*.sqlite*"):
         f.unlink()

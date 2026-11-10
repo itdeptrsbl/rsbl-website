@@ -204,3 +204,23 @@ expectFailure(
     ))->createAppointment($payload),
     'Respons tanpa nomor appointment tidak dianggap konfirmasi',
 );
+
+// Penghentian integrasi harus mencegah koneksi walaupun kredensial terisi.
+$disabledCalls = 0;
+$disabledClient = new Client(
+    [
+        'enabled' => false,
+        'base_url' => 'https://example.test/api',
+        'consumer_id' => 'TEST',
+        'password' => 'TEST',
+    ],
+    static function () use (&$disabledCalls) {
+        $disabledCalls++;
+        return [200, '{}'];
+    },
+);
+expectFailure(
+    static fn() => $disabledClient->outpatientUnits(),
+    'Integrasi nonaktif menolak permintaan sebelum menghubungi API',
+);
+expect($disabledCalls === 0, 'Tidak ada koneksi API ketika integrasi dinonaktifkan');
