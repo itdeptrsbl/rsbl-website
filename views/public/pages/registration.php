@@ -128,8 +128,8 @@
             </section>
             <section data-step="3" hidden>
                 <p class="eyebrow">LANGKAH 4 DARI 4</p><h2>Jenis pembayaran</h2>
-                <!-- Pribadi selalu tersedia; kategori penjamin lainnya diambil dari master payer API. -->
-                <label>Jenis pembayaran<select name="payment_category" required><option value="">Pilih jenis pembayaran</option><option value="Pribadi">Pribadi</option></select></label>
+                <!-- Pribadi dan Lain-lain selalu tersedia; kategori penjamin lainnya mengikuti API. -->
+                <label>Jenis pembayaran<select name="payment_category" required><option value="">Pilih jenis pembayaran</option><option value="Pribadi">Pribadi</option><option value="Lain-lain">Lain-lain</option></select></label>
                 <p class="muted" data-payment-status role="status" aria-live="polite"></p>
                 <button type="button" class="text-link" data-payment-retry hidden>Coba muat jenis pembayaran lagi</button>
                 <!-- Pilihan penjamin diisi dari kategori master payer; data kontrak tidak ditampilkan. -->

@@ -32,7 +32,12 @@
             if (!response.ok || !Array.isArray(payload.categories))
                 throw new Error('Kategori belum tersedia.');
             payload.categories.forEach((name) => {
-                if (name !== 'Pribadi') paymentCategory.add(new Option(name, name));
+                if (!['Pribadi', 'Lain-lain'].includes(name)) {
+                    paymentCategory.add(
+                        new Option(name, name),
+                        paymentCategory.querySelector('[value="Lain-lain"]'),
+                    );
+                }
             });
             paymentCategoriesLoaded = true;
             paymentStatus.textContent = '';
@@ -55,7 +60,7 @@
         payerSelect.required = false;
         payerStatus.textContent = '';
         payerRetry.hidden = true;
-        payerFields.hidden = !category || category === 'Pribadi';
+        payerFields.hidden = !category || ['Pribadi', 'Lain-lain'].includes(category);
         if (payerFields.hidden) return;
         form.querySelector('[data-payer-label]').textContent =
             category === 'Karyawan' ? 'Perusahaan / penjamin karyawan' : 'Perusahaan / penjamin';
